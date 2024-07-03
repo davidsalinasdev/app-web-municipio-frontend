@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+
+<!-- seccion de  iconos de acceso -->
+<section class="container menu-icons" style="max-width: 1600px;">
+
+  <div class="seccion-iconos">
+
+    <!-- Gaceta Municipal -->
+    <div class="iconos d-flex flex-column justify-content-start align-items-center">
+      <span class="seccion-iconos__icon"><i class="bi bi-bank"></i></span>
+      <h3 class="iconos__titulo">Gaceta Municipal</h3>
+    </div>
+
+    <!-- Reclamos para alumbrado publico -->
+    <div class="iconos d-flex flex-column justify-content-start align-items-center">
+      <span class="seccion-iconos__icon"><i class="bi bi-sun"></i></span>
+      <h3 class="iconos__titulo">Reclamos alumbrado publico</h3>
+    </div>
+
+    <!-- Seguimiento a tramites -->
+    <div class="iconos d-flex flex-column justify-content-start align-items-center">
+      <span class="seccion-iconos__icon"><i class="bi bi-signpost-split"></i></span>
+      <h3 class="iconos__titulo">Seguimiento a tramites</h3>
+    </div>
+
+  </div>
+
+</section>
+<!-- Fin Seccion de iconos de acceso -->
+
+
+<app-noticias></app-noticias>
+
+<app-eventos></app-eventos>
+
+<div #gobierno class="animated fadeIn fast">
+  @defer (on viewport(gobierno)) {
+  <app-gobierno-electronico></app-gobierno-electronico>
+  }
+</div>
+
+
+<app-lugar-interes></app-lugar-interes>
+
+<app-ubicacion></app-ubicacion>
+
+<app-contactanos></app-contactanos>
+
+<app-footer></app-footer>

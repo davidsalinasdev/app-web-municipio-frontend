@@ -1,1 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --blanco: #ffffff;
+  --oscuro: #212121;
+  --primario: #ED4C67;
+  --primario_oscuro: #353b48;
+  --primario_claro: #fbbb00;
+  --secundario: #A0DEFF;
+  --secundario_oscuro: #5AB2FF;
+  --gris: #757575;
+  --grisClaro: #DFE9F3;
+}
+
+body {
+  font-size: 16px;
+  /* 1rem = 10px */
+  /* font-family: 'Open Sans', sans-serif !important; */
+  font-family: -apple-system,
+    system-ui,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif !important;
+}
+
+/* Tipografia */
+h1 {
+  font-size: 9.8rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+h1,
+h2,
+h3 {
+  /* font-family: 'PT Sans', sans-serif; */
+  font-family: -apple-system,
+    system-ui,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif !important;
+  text-align: center;
+}
+
+/* Titulo y iconos de Seccion noticias */
+
+.circulos {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.circulos__icons {
+  color: #fbbb00;
+}
+
+/* FIN Titulo y iconos de Seccion noticias */
+
+/* Acelerando las animaciones */
+.fast {
+  -webkit-animation-duration: 0.3s !important;
+  animation-duration: 0.3s !important;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both
+}
+
+/* FIN Acelerando las animaciones */

@@ -1,0 +1,136 @@
+nav {
+  /* border-bottom: 1px solid #fbbb00; */
+  box-shadow: 0px 0px 5px rgb(34, 34, 34);
+}
+
+.logoTecSur {
+  width: 10rem;
+}
+
+@media (min-width: 768px) {
+
+  /* logica */
+  .logoTecSur {
+    width: 13rem;
+  }
+}
+
+.fondo {
+
+  /* background-image: url('../../../../assets/img/bg-menu.png');
+  opacity: 0.4;
+  z-index: 999; */
+  background: rgb(15, 167, 246);
+  background: linear-gradient(90deg, rgba(15, 167, 246, 1) 0%, rgba(9, 45, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  padding: 0.2rem;
+
+}
+
+.fondo-dos {
+  background-color: #fbbb00;
+  border: 1px solid rgb(219, 219, 219);
+}
+
+.titulo-menu {
+  display: none;
+}
+
+@media (min-width: 1429px) {
+  .titulo-menu {
+    display: initial;
+  }
+}
+
+div.logo-menu a.navbar-brand {
+  font-size: 2rem;
+  /* font-family: 'PT Sans',sans-serif; */
+  font-family: -apple-system,
+    system-ui,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif !important;
+}
+
+div.logo-menu div ul li a {
+  font-size: 1.2rem;
+  font-family: 'Oswald',
+    sans-serif
+}
+
+div.logo-menu div ul li a:hover {
+  /* color: #fe4918; */
+
+  border-bottom: 2px solid #fbbb00;
+}
+
+/* Estilo de con typeScript */
+.linea-activada {
+  border-bottom: 2px solid #fbbb00;
+  color: aliceblue;
+}
+
+.reservaciones {
+  /* margin-left: 20px; */
+  /* padding: 15px !important;  */
+  border: 1px solid #fbbb00;
+  transition-duration: 0.6s;
+}
+
+@media (min-width: 992px) {
+
+  /* logica */
+  .reservaciones {
+    margin-left: 20px;
+  }
+}
+
+.reservaciones:hover {
+  background-color: #fbbb00;
+  color: white !important;
+}
+
+.peque {
+  font-size: 0.75rem;
+  color: #888888d3;
+
+}
+
+.peque span {
+  color: #0a335cd5;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.barrita {
+
+  /* color: aliceblue !important; */
+  border-right: 1px solid aliceblue;
+}
+
+.index {
+  z-index: 1000;
+}
+
+.fixed-top2 {
+  position: fixed;
+  top: 0px;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+
+@media(min-width: 992px) {
+  .dropdown-menu {
+    right: 0;
+    left: auto;
+    transform: translateX(-15%);
+  }
+}
+
+.nav-item {
+  cursor: pointer;
+}

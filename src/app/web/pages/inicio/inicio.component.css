@@ -1,0 +1,23 @@
+.menu-icons {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.seccion-iconos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.seccion-iconos__icon {
+  font-size: 5rem;
+  color: var(--secundario);
+}
+
+.iconos:hover {
+  cursor: pointer;
+
+  .seccion-iconos__icon {
+    color: var(--primario_claro);
+  }
+}
