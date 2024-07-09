@@ -1,7 +1,7 @@
 /* Estilos personalizados para la sección de noticias */
 .noticias-container {
   /* background-color: #fdf8dce0; */
-  padding-top: 4rem;
+  margin-top: 2rem;
 }
 
 .noticias-header {
@@ -49,10 +49,6 @@
   margin-bottom: 0.5rem;
 }
 
-.card-text {
-  font-size: 1rem;
-  color: #555;
-}
 
 .btn-leer-mas {
   background-color: #007bff;
@@ -63,6 +59,7 @@
 .btn-leer-mas:hover {
   background-color: #0056b3;
   color: white;
+
 }
 
 

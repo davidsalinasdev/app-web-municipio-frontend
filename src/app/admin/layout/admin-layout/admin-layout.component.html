@@ -1,0 +1,57 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" class="animated fadeIn fast">
+
+  <!-- Cabecera de la aplicación -->
+  <app-admin-header></app-admin-header>
+
+  <!-- Aside de la aplicación -->
+  <app-admin-sidebar></app-admin-sidebar>
+
+
+
+  <!-- Page wrapper  -->
+  <div class="page-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs -->
+      <app-breadcrumbs></app-breadcrumbs>
+
+      <!-- Aqui el sistema de rutas del template -->
+      <!-- ============================================================== -->
+      <!-- Start Page Content -->
+      <!-- ============================================================== -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <!-- Aqui se estan renderizando las paginas pages -->
+              <!-- 
+                dashboard
+                grafica1
+                progress
+               -->
+              <!-- Rederizado de las paginas de adminPro -->
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- End PAge Content -->
+      <!-- ============================================================== -->
+
+      <!-- footer -->
+      <app-admin-footer></app-admin-footer>
+
+
+    </div>
+
+
+  </div>
+  <!-- End Page wrapper  -->
+
+
+
+
+</div>

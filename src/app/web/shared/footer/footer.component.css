@@ -1,4 +1,4 @@
-.footer {
+.footer-container {
   /* background-image: url('../../../../assets/img/bg-menu.png'); */
   /* z-index: 999; */
   background: rgb(15, 167, 246);
@@ -6,16 +6,35 @@
 }
 
 .footer__row {
-  padding: 5rem 5rem 2rem 4rem;
+  padding: 4rem 4rem 2rem 4rem;
 }
 
+
 .footer__logo {
-  max-width: 400px
+  max-width: 70%;
 }
+
+@media (min-width: 576px) {
+  .footer__logo {
+    max-width: 60%;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer__logo {
+    max-width: 90%;
+  }
+}
+
+
 
 .footer__parrafo {
   color: aliceblue;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+}
+
+.footer__parrafo--color {
+  color: aliceblue !important;
 }
 
 .footer__icon {

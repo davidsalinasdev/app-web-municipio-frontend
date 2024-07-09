@@ -1,10 +1,8 @@
  /* Estilos personalizados para la sección de eventos */
 
- /* .eventos-container {
-   background-color: #c6f3ea;
-   border: 1px solid rgba(219, 219, 219, 0);
-   padding: 4rem 0;
- } */
+ .eventos-container {
+   margin-top: 2rem;
+ }
 
  .eventos-header {
    text-align: center;
@@ -20,12 +18,12 @@
 
  .event-card {
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    background-color: #f8f9fa;
    border-radius: 15px;
    overflow: hidden;
    transition: transform 0.3s;
-   height: 300px;
+   /* height:400 px; */
    /* Altura ajustada para tarjetas más grandes */
  }
 
@@ -34,10 +32,21 @@
  }
 
  .event-card img {
-   width: 50%;
+   width: 100%;
    object-fit: cover;
    height: 100%;
    /* Ajusta la imagen para que llene toda la altura */
+ }
+
+ @media(min-width: 768px) {
+   .event-card {
+     flex-direction: row;
+     height: 400px;
+   }
+
+   .event-card img {
+     width: 50%;
+   }
  }
 
  .event-card-content {
@@ -48,13 +57,14 @@
  }
 
  .event-card-title {
-   font-size: 1.75rem;
-   font-weight: bold;
+   font-size: 24px;
+   color: #455a64;
+   font-weight: 700;
    margin-bottom: 0.75rem;
  }
 
  .event-card-text {
-   font-size: 1rem;
+   font-size: 1.3rem;
    color: #555;
    margin-bottom: 1rem;
  }

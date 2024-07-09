@@ -6,7 +6,7 @@ import { WebRoutingModule } from './web-routing.module';
 // Modulo SHARED
 import { SharedModule } from './shared/shared.module';
 
-// Componente que pertenecen a Web
+// Componentes que pertenecen a Web
 import { WebLayoutComponent } from './layout/web-layout/web-layout.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
@@ -17,12 +17,15 @@ import { ParticipacionCiudadanaComponent } from './pages/participacion-ciudadana
 import { TurismoCulturaComponent } from './pages/turismo-cultura/turismo-cultura.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { EducacionSaludComponent } from './pages/educacion-salud/educacion-salud.component';
+
+// web/componenents
 import { NoticiasComponent } from './components/noticias/noticias.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { LugarInteresComponent } from './components/lugar-interes/lugar-interes.component';
 import { GobiernoElectronicoComponent } from './components/gobierno-electronico/gobierno-electronico.component';
 import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
 import { ContactanosComponent } from './components/contactanos/contactanos.component';
+import { SeccionInteresCiudadanoComponent } from './components/seccion-interes-ciudadano/seccion-interes-ciudadano.component';
 
 
 @NgModule({
@@ -42,7 +45,8 @@ import { ContactanosComponent } from './components/contactanos/contactanos.compo
     LugarInteresComponent,
     GobiernoElectronicoComponent,
     UbicacionComponent,
-    ContactanosComponent
+    ContactanosComponent,
+    SeccionInteresCiudadanoComponent
   ],
   imports: [
     CommonModule,

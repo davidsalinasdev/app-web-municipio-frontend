@@ -1,5 +1,5 @@
    /* Rellenando toda la pantalla */
-   #carouselExampleIndicators {
+   #carouselExampleIndicators2 {
      height: 100vh;
      /* 100% of viewport height */
    }
@@ -95,49 +95,3 @@
    }
 
    /* FIN Posicionamiento del mensaje en las imagenes de carrusel */
-
-   /* Redes sociales */
-   .redes-sociales {
-     position: fixed;
-     z-index: 500;
-     bottom: 120px;
-     right: 80px;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     gap: 20px;
-   }
-
-   .redes-sociales a img {
-     width: 65px;
-     padding: 3px;
-     background-color: rgba(0, 0, 0, 0.10);
-     cursor: pointer;
-     border-radius: 100%;
-     transition: all 300ms;
-     animation: resplandor 2s infinite;
-     /* Añade la animación */
-   }
-
-   .redes-sociales a {
-     margin-top: 5px;
-   }
-
-   .redes-sociales a:hover img {
-     padding: 5px;
-     background-color: rgba(0, 0, 0, 0.10);
-   }
-
-   @keyframes resplandor {
-
-     0%,
-     100% {
-       box-shadow: 0 0 5px 2px rgba(251, 252, 252, 0.5);
-     }
-
-     50% {
-       box-shadow: 0 0 8px 5px rgb(251, 254, 255);
-     }
-   }
-
-   /* FIN Redes sociales */

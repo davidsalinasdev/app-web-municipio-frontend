@@ -15,6 +15,14 @@ nav {
   }
 }
 
+@media (min-width: 992px) {
+
+  /* logica */
+  .logoTecSur {
+    width: 15rem;
+  }
+}
+
 .fondo {
 
   /* background-image: url('../../../../assets/img/bg-menu.png');
@@ -57,12 +65,12 @@ div.logo-menu a.navbar-brand {
 div.logo-menu div ul li a {
   font-size: 1.2rem;
   font-family: 'Oswald',
-    sans-serif
+    sans-serif;
+  font-weight: 400;
 }
 
 div.logo-menu div ul li a:hover {
   /* color: #fe4918; */
-
   border-bottom: 2px solid #fbbb00;
 }
 

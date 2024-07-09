@@ -1,0 +1,34 @@
+.menu-icons {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+
+.seccion-iconos__icon {
+  font-size: 5rem;
+  text-align: center;
+  color: var(--secundario);
+}
+
+.iconos {
+  transition: transform 0.3s ease;
+
+  .seccion-iconos__icon {
+    transition: color 0.3s ease;
+  }
+}
+
+.iconos:hover {
+  cursor: pointer;
+  transform: matrix(1.05, 0, 0, 1.05, 0, 0);
+
+  .seccion-iconos__icon {
+    color: var(--primario_claro);
+  }
+}
+
+.iconos__titulo {
+  color: #091b58;
+  font-weight: 500;
+  font-size: 2rem;
+}
