@@ -1,0 +1,57 @@
+<!-- Lista de datos de la tabla Persona -->
+
+<div class="d-flex justify-content-between">
+
+  <div class="titulo-principal">
+    <h4 class="card-title">Administración de Personas</h4>
+    <h6 class="card-subtitle">Lista de datos de la tabla Persona</h6>
+  </div>
+
+  <div class="btn-agregar">
+    <button class="btn btn-info" (click)="this.btnModalAgregar()"><i class="fa fa-plus"></i> Agregar</button>
+  </div>
+
+</div>
+
+<div class="table-responsive m-t-40">
+  <table id="myTablePersona" class="table table-bordered">
+    <thead class="table__thead">
+      <tr>
+        <th style="width: 10%;">Identificador</th>
+        <th style="width: 25%;">Nombres</th>
+        <th style="width: 25%;">Apellidos</th>
+        <th style="width: 15%;">Carnet</th>
+        <th style="width: 15%;">Estado</th>
+        <th style="width: 10%;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- @for (item of this.listaPersonas; track item.id) {
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.nombres }}</td>
+        <td>{{ item.apellidos }}</td>
+        <td>{{ item.carnet }}</td>
+        <td>
+          @if (item.estado === 1) {
+          <span class="badge badge-success">Activo</span>
+          }@else{
+          <span class="badge badge-danger">Inactivo</span>
+          }
+        </td>
+        <td>
+          <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title=""
+            data-original-title="Modificar"><i class="fa fa-edit text-dark"></i></button>
+
+          <button class="btn btn-danger ml-2" data-toggle="tooltip" data-placement="top" title=""
+            data-original-title="Deshabilitar"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+      } @empty {
+      <li class="list-task">Lista vacia</li>
+      } -->
+
+    </tbody>
+  </table>
+</div>

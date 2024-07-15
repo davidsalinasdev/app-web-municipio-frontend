@@ -31,6 +31,12 @@ body {
   color: #555;
 }
 
+label {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #555;
+}
+
 html {
   scroll-behavior: smooth !important;
 }
@@ -90,3 +96,15 @@ h3 {
 }
 
 /* FIN Acelerando las animaciones */
+
+/* Aumentar ancho y alto de input globalmente */
+input {
+
+  /* Puedes definir un ancho máximo si lo deseas */
+  height: 50px;
+  /* Ajusta a la altura que necesites, por ejemplo, 40px */
+  box-sizing: border-box;
+  /* Esto asegura que el padding y el borde se incluyan en el ancho total */
+}
+
+/* FIN Aumentar ancho y alto de input globalmente */

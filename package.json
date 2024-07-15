@@ -24,9 +24,11 @@
     "countup.js": "^2.8.0",
     "fslightbox": "^3.4.1",
     "gsap": "^3.12.5",
+    "hls.js": "^1.5.13",
     "jquery": "^3.7.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "video.js": "^8.16.1",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
@@ -34,6 +36,7 @@
     "@angular/cli": "^18.0.4",
     "@angular/compiler-cli": "^18.0.0",
     "@types/jasmine": "~5.1.0",
+    "@types/jquery": "^3.5.30",
     "@types/node": "^20.14.9",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",

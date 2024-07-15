@@ -1,13 +1,20 @@
-<div class="card-no-border">
-  <!-- Preloader - style you can find in spinners.css -->
-  <!-- ============================================================== -->
-  <div class="preloader">
-    <div class="loader">
-      <div class="loader__figure"></div>
-      <img class="img-fluid loader__figure--logo" src="./../../../../assets/img/logoclizasun-5.png" alt="Logo cliza">
-      <p class="loader__label">Gobierno Autónomo Municipal de Cliza</p>
-    </div>
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader" *ngIf="loading">
+  <div class="loader">
+    <div class="loader__figure"></div>
+
+    <p class="loader__label text-center">
+      <img class="loader__figure--logo" src="./../../../../assets/img/logoclizasun-5.png" alt="Logo cliza"><br>
+      Gobierno Autónomo Municipal de Cliza
+    </p>
   </div>
+</div>
+
+<div class="card-no-border">
+
+
+
   <!-- ============================================================== -->
   <!-- Main wrapper - style you can find in pages.scss -->
   <!-- ============================================================== -->

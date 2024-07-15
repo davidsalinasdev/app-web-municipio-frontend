@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-
 
 // Variables globales
 import { environment } from './../../../environments/environment';
@@ -16,7 +15,16 @@ const base_url = environment.base_url;
 export class LoginService {
 
   // Inyeccion de dependencias
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
+
+
+  // Para proteger ruta del administrador miestras no este logueado
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+  // FIN Para proteger ruta del administrador miestras no este logueado
 
 
   /**
@@ -29,6 +37,19 @@ export class LoginService {
           localStorage.setItem('token', resp.token)
         })
       )
+  }
+
+  /**
+   * logout
+   */
+  public logout() {
+    //  Antes sin interceptores
+    // let headers = new HttpHeaders();
+    // headers = headers.set('Authorization', `Bearer ${this.getToken()}`); // Establece el encabezado Authorization
+    // const options = { headers: headers };
+
+    return this.http.get(`${base_url}/api/logout`);
+
   }
 
 }

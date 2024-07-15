@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   // Formulario
   public formulario!: FormGroup;
 
+  public loading: boolean = false;
+
   // Servicios con inyecion de depencencias
   constructor(
     private fb: FormBuilder,
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.formulario.get('password');
   }
+
   get remember() {
     return this.formulario.get('remember');
   }
@@ -52,6 +55,8 @@ export class LoginComponent implements OnInit {
    */
   public login() {
 
+    this.loading = true; // Mostrar el preloader mientras se procesa el login
+
     const formData: Login = this.formulario.value
 
     this.loginServices.login(formData).subscribe({
@@ -60,6 +65,9 @@ export class LoginComponent implements OnInit {
         if (resp.token) {
           localStorage.setItem('token', resp.token);
           this.router.navigate(['/admin/dashboard']);
+          setTimeout(() => {
+            this.loading = false; // Ocultar el preloader si ya llego una respuesta
+          }, 5000);
         }
 
       },
@@ -72,4 +80,6 @@ export class LoginComponent implements OnInit {
     });
 
   }
+
+
 }

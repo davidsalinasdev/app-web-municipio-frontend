@@ -21,7 +21,7 @@ export class InicioComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: Event): void {
     const scrollTop = window.scrollY;
-    console.log('Desplazamiento actual:', scrollTop);
+    // console.log('Desplazamiento actual:', scrollTop);
     // Aquí puedes agregar la lógica que necesites al desplazar la página
   }
 

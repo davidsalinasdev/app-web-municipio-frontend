@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Como se crean rutas hijas de este modulo, se importa el componente Dashboard
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+// Componente principal donde sa va a renderizar las rutas hijas
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+
+
 
 const routes: Routes = [
   {
-    path: 'dashboard', component: AdminLayoutComponent, data: { titulo: 'Renderzacion de componentes ADMIN' },
-  }
+    path: 'dashboard',
+    component: AdminLayoutComponent,
+    data: { titulo: 'Renderzación de componentes ADMIN' },
+    loadChildren: () => import('./page-child-routes.module').then(m => m.PageChildRoutesModule)
+  },
 ];
 
 @NgModule({

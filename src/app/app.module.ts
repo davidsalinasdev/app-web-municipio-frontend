@@ -7,8 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './admin/auth/auth.module';
 
 // Interceptor
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-import { interceptorInterceptor } from './interceptor/interceptor.interceptor';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import { TokenInterceptor } from './interceptor/interceptor.interceptor';
 
 // Componentes de APP
 import { AppComponent } from './app.component';
@@ -23,11 +24,13 @@ import { NoPagesFoundComponent } from './no-pages-found/no-pages-found.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useValue: interceptorInterceptor, multi: true },
-    provideHttpClient(), // Nueva forma de manejar peticiones HTTP
+    // Uso de interceptor
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    // provideHttpClient(), // Nueva forma de manejar peticiones HTTP
   ],
   bootstrap: [AppComponent]
 })

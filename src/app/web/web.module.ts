@@ -26,6 +26,7 @@ import { GobiernoElectronicoComponent } from './components/gobierno-electronico/
 import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
 import { ContactanosComponent } from './components/contactanos/contactanos.component';
 import { SeccionInteresCiudadanoComponent } from './components/seccion-interes-ciudadano/seccion-interes-ciudadano.component';
+import { TelevisionComponent } from './components/television/television.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { SeccionInteresCiudadanoComponent } from './components/seccion-interes-c
     GobiernoElectronicoComponent,
     UbicacionComponent,
     ContactanosComponent,
-    SeccionInteresCiudadanoComponent
+    SeccionInteresCiudadanoComponent,
+    TelevisionComponent
   ],
   imports: [
     CommonModule,

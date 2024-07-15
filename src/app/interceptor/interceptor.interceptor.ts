@@ -1,55 +1,34 @@
-import { HttpInterceptorFn } from '@angular/common/http';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpHeaders,
-  HttpErrorResponse
-} from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpHeaders, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-// INTERCEPTOR BASADO EN FUNCIONES
+@Injectable()
+export class TokenInterceptor implements HttpInterceptor {
 
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = this.getToken(); // Obtiene el token
 
-// Función para obtener el token
-const getToken = (): string | null => {
-  const infoToken = localStorage.getItem('access');
-  if (infoToken) {
-    const { token } = JSON.parse(infoToken);
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`); // Establece el encabezado Authorization
+    }
+
+    const reqClone = req.clone({ headers });
+    return next.handle(reqClone).pipe(
+      catchError(this.handleError) // Maneja errores
+    );
+  }
+
+  private getToken(): string | null {
+    const token = localStorage.getItem('token');
+    // console.log(token); // Para propósitos de depuración
     return token;
   }
-  return null;
-};
 
-
-// Función para manejar errores
-const manejarError = (error: HttpErrorResponse): Observable<never> => {
-
-  console.log('Sucedió un error');
-  console.log('Registrado en el log file');
-  console.warn(error);
-
-  return throwError(() => new Error(error.message));
-};
-
-
-// FUNCIÓN DE INTERCEPTOR BASADO EN FUNCIONES
-export const interceptorInterceptor: HttpInterceptorFn = (req, next) => {
-  let headers = new HttpHeaders();
-  const token = getToken();
-
-  if (token) {
-    headers = headers.set('token-usuario', token);
-  } else {
-    headers = headers.set('token-usuario', '');
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    // Aquí puedes agregar más lógica para manejar errores específicos
+    console.error('HTTP Error:', error.message); // Registro del error para propósitos de depuración
+    return throwError(() => new Error(error.message));
   }
-
-  const reqClone = req.clone({ headers });
-
-  return next(reqClone).pipe(
-    catchError(manejarError)
-  );
-
-};
+}
