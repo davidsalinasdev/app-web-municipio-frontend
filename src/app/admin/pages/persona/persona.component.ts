@@ -9,6 +9,7 @@ import { Persona } from '../../models/persona';
 import { PersonaSignalServices } from '../../services/persona-signals.service';
 
 
+
 // jquery en angular
 declare var $: any;
 
@@ -82,7 +83,7 @@ export class PersonaComponent implements OnInit, OnDestroy {
 
       },
       error: (err) => {
-        console.log(err);
+        console.log('error');
       },
       complete: () => {
         console.log('complete');

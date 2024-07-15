@@ -14,7 +14,7 @@
 </div>
 
 <div class="table-responsive m-t-40">
-  <table id="myTablePersona" class="table table-bordered">
+  <table id="myTablePersona" class="table table-bordered table--largo">
     <thead class="table__thead">
       <tr>
         <th style="width: 10%;">Identificador</th>
@@ -26,32 +26,7 @@
       </tr>
     </thead>
     <tbody>
-
-      <!-- @for (item of this.listaPersonas; track item.id) {
-      <tr>
-        <td>{{ item.id }}</td>
-        <td>{{ item.nombres }}</td>
-        <td>{{ item.apellidos }}</td>
-        <td>{{ item.carnet }}</td>
-        <td>
-          @if (item.estado === 1) {
-          <span class="badge badge-success">Activo</span>
-          }@else{
-          <span class="badge badge-danger">Inactivo</span>
-          }
-        </td>
-        <td>
-          <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title=""
-            data-original-title="Modificar"><i class="fa fa-edit text-dark"></i></button>
-
-          <button class="btn btn-danger ml-2" data-toggle="tooltip" data-placement="top" title=""
-            data-original-title="Deshabilitar"><i class="fa fa-trash"></i></button>
-        </td>
-      </tr>
-      } @empty {
-      <li class="list-task">Lista vacia</li>
-      } -->
-
+      <!-- DATATABLES -->
     </tbody>
   </table>
 </div>

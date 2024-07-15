@@ -28,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     // Aquí puedes agregar más lógica para manejar errores específicos
-    console.error('HTTP Error:', error.message); // Registro del error para propósitos de depuración
+    console.error('HTTP Error:', error); // Registro del error para propósitos de depuración
     return throwError(() => new Error(error.message));
   }
 }

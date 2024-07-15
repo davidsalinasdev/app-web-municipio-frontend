@@ -1,23 +1,17 @@
-<!-- Modal formulario para agregar personas -->
+<!-- Modal formulario para agregar persona -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
   style="display: none;" aria-hidden="true" id="modal-agregar-persona">
   <div class="modal-dialog modal-heading">
     <div class="modal-content modal-content--borde">
 
-      <form [formGroup]="this.formulario" (ngSubmit)="submit()">
+      <form #formDirective="ngForm" [formGroup]="this.formulario" (ngSubmit)="submit(formDirective)">
 
         <div class="modal-header bg-info modal-content__modal-header--borde">
           <h4 class="modal-title text-white" id="myLargeModalLabel">Formulario de registro de personas</h4>
           <button type="button" class="close modal-header--close" data-dismiss="modal" aria-hidden="true">x</button>
         </div>
 
-
-
         <div class="modal-body modal-body--form">
-
-
-
-
 
           <div class="form-group">
             <label for="nombres">Nombres<span class="text-danger">*</span></label>
@@ -67,14 +61,80 @@
         </div>
 
       </form>
-
     </div>
-
-
-
-
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
 <!-- /.FIN modal formulario para agregar personas -->
+
+
+<!-- Modal formulario para editar persona -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  style="display: none;" aria-hidden="true" id="modal-editar-persona">
+  <div class="modal-dialog modal-heading">
+    <div class="modal-content modal-content--borde">
+
+      <form #formDirective="ngForm" [formGroup]="this.formulario" (ngSubmit)="submit(formDirective)">
+
+        <div class="modal-header bg-info modal-content__modal-header--borde">
+          <h4 class="modal-title text-white" id="myLargeModalLabel">Formulario de registro de personas</h4>
+          <button type="button" class="close modal-header--close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+
+        <div class="modal-body modal-body--form">
+
+          <div class="form-group">
+            <label for="nombres">Nombres<span class="text-danger">*</span></label>
+            <input type="text" class="form-control form-control" id="nombres" placeholder="Ingrese su nombre"
+              formControlName="nombres">
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.nombres?.invalid && (this.nombres?.dirty || this.nombres?.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.nombres?.hasError('required')" class="animated fadeIn fast text-danger font-14" id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="apellidos">Apellidos<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="apellidos" placeholder="Ingrese sus apellidos"
+              formControlName="apellidos">
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.apellidos?.invalid && (this.apellidos?.dirty || this.apellidos?.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.apellidos?.hasError('required')" class="animated fadeIn fast text-danger font-14" id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="carnet">Carnet<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="carnet" placeholder="Ingrese su nro. de carnet"
+              formControlName="carnet">
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.carnet?.invalid && (this.carnet?.dirty || this.carnet?.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.carnet?.hasError('required')" class="animated fadeIn fast text-danger font-14" id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-info m-r-10" [disabled]="this.formulario.invalid">Guardar</button>
+        </div>
+
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.FIN modal formulario para editar persona -->

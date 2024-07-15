@@ -44,12 +44,14 @@
               "src/styles.css",
 
               "node_modules\\bootstrap-icons\\font\\bootstrap-icons.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/toastr/build/toastr.css"
 
             ],
             "scripts": [
               "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
-              "node_modules/fslightbox/index.js"
+              "node_modules/fslightbox/index.js",
+              "node_modules/toastr/build/toastr.min.js"
             ]
           },
           "configurations": {
@@ -71,12 +73,10 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.development.ts"
+              }]
             }
           },
           "defaultConfiguration": "production"
