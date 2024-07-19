@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // Componenetes de Admin Shared Module
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
@@ -17,7 +18,8 @@ import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
     AdminSidebarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     BreadcrumbsComponent,

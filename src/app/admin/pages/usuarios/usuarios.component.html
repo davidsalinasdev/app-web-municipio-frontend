@@ -1,27 +1,24 @@
-<!-- Lista de datos de la tabla Persona -->
+<!-- Lista de datos de la tabla Usuario -->
 
 <div class="d-flex justify-content-between animated fadeIn fast">
-
   <div class="titulo-principal">
-    <h4 class="card-title">Administración de Personas</h4>
-    <h6 class="card-subtitle">Lista de datos de la tabla Persona</h6>
+    <h4 class="card-title">Administración de Usuarios</h4>
+    <h6 class="card-subtitle">Lista de datos de la tabla Usuario</h6>
   </div>
 
   <div class="btn-agregar">
     <button class="btn btn-info" (click)="this.btnModalAgregar()"><i class="fa fa-plus"></i> Agregar</button>
   </div>
-
 </div>
 
 <div class="table-responsive m-t-40 animated fadeIn fast">
-  <table #myTablePersona id="myTablePersona" class="table table-bordered table--largo">
+  <table #myTableUsuario id="myTableUsuario" class="table table-bordered table--largo">
     <thead class="table__thead">
       <tr>
         <th style="width: 10%;">Identificador</th>
-        <th style="width: 25%;">Nombres</th>
-        <th style="width: 25%;">Apellidos</th>
-        <th style="width: 15%;">Carnet</th>
-        <th style="width: 15%;">Estado</th>
+        <th style="width: 25%;">Email</th>
+        <th style="width: 25%;">Funcionario</th>
+        <th style="width: 25%;">Estado</th>
         <th style="width: 10%;">Acciones</th>
       </tr>
     </thead>

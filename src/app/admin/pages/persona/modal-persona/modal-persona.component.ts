@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+
 // Servicios
 import { PersonaService } from '../../../services/persona.service';
 import { PersonaSignalServices } from '../../../services/persona-signals.service';
 
 import * as toastr from 'toastr'; // Importa Toastr
+import { Subscription } from 'rxjs';
+import { PersonaUpdateSignalService } from '../../../services/persona-update-signal.service';
+import { Persona } from '../../../models/persona';
+
 
 // jquery en angular
 declare var $: any;
@@ -20,11 +24,40 @@ export class ModalPersonaComponent implements OnInit {
 
   // Formulario
   public formulario!: FormGroup;
+  public formularioUpdate!: FormGroup;
 
+  private subscription!: Subscription;
+
+  public idPersona!: number;
+
+
+  // Select
+  public estados = [
+    { value: 1, estado: 'Activo' },
+    { value: 0, estado: 'Inactivo' }
+  ];
 
   ngOnInit(): void {
 
+
+
+    this.subscription = this.personaUpdateSignalServices.dataUpdate$.subscribe((data) => {
+
+      this.idPersona = data.id!;
+
+      this.formularioUpdate.setValue({
+        nombresUpdate: data.nombres,
+        apellidosUpdate: data.apellidos,
+        carnetUpdate: data.carnet,
+        estadoUpdate: Number(data.estado),
+      });
+
+    });
+
     this.crearFormulario();
+
+    this.crearFormularioUpdate();
+
   }
 
 
@@ -33,7 +66,7 @@ export class ModalPersonaComponent implements OnInit {
     private fb: FormBuilder,
     private personaServices: PersonaService,
     private personasSignalServices: PersonaSignalServices,
-    private router: Router
+    private personaUpdateSignalServices: PersonaUpdateSignalService,
   ) {
 
     // Configura las opciones predeterminadas de Toastr
@@ -65,6 +98,32 @@ export class ModalPersonaComponent implements OnInit {
     return this.formulario.get('carnet');
   }
 
+  public crearFormularioUpdate() {
+
+    this.formularioUpdate = this.fb.group({
+      nombresUpdate: ['', Validators.required],
+      apellidosUpdate: ['', Validators.required],
+      carnetUpdate: ['', Validators.required],
+      estadoUpdate: ['', Validators.required]
+    })
+
+  }
+  // Validaciones para formulario
+  get nombresUpdate() {
+    return this.formularioUpdate.get('nombresUpdate');
+  }
+  get apellidosUpdate() {
+    return this.formularioUpdate.get('apellidosUpdate');
+  }
+
+  get carnetUpdate() {
+    return this.formularioUpdate.get('carnetUpdate');
+  }
+  get estadoUpdate() {
+    return this.formularioUpdate.get('estadoUpdate');
+  }
+
+
   /**
    * submit
    */
@@ -77,6 +136,7 @@ export class ModalPersonaComponent implements OnInit {
         const { status, persona, message } = resp;
 
         if (status === 'success') {
+
           // Emisión de de datos
           this.personasSignalServices.sendData(persona);
 
@@ -86,10 +146,10 @@ export class ModalPersonaComponent implements OnInit {
           // Display a success toast, with a title
           // Configura opciones adicionales y muestra la notificación
           toastr.success(`Se registro correctamente`, 'Web GAMDC')
+
           // Cierra el modal
           $('#modal-agregar-persona').modal('hide');
         }
-
       },
       error: (err) => {
         toastr.error(`Intente nuevamente`, 'Web GAMDC')
@@ -100,5 +160,58 @@ export class ModalPersonaComponent implements OnInit {
       }
     })
   }
+
+
+  /**
+   * submitUodate
+   */
+  public submitUpdate(formDirectiveUpdate: FormGroupDirective) {
+
+    const formData: Persona = {
+
+      id: this.idPersona, // Se agrega el id de la persona
+      nombres: this.formularioUpdate.value.nombresUpdate,
+      apellidos: this.formularioUpdate.value.apellidosUpdate,
+      carnet: this.formularioUpdate.value.carnetUpdate,
+      estado: this.formularioUpdate.value.estadoUpdate
+
+    }
+
+
+    this.personaServices.update(formData, this.idPersona).subscribe({
+      next: (resp: any) => {
+
+        const { status, persona, message } = resp;
+
+        if (status === 'success') {
+
+          toastr.success(`Se actualizo correctamente`, 'Web GAMDC')
+          $('#modal-editar-persona').modal('hide');
+
+          // Emisión de de datos
+          this.personasSignalServices.sendData(persona);
+
+          formDirectiveUpdate.resetForm();
+
+        }
+
+      },
+      error: (err) => {
+        toastr.error(`Intente nuevamente`, 'Web GAMDC')
+        console.log('error');
+      },
+      complete: () => {
+        console.log('complete');
+      }
+    });
+  }
+
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
 
 }

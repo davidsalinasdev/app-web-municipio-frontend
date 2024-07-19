@@ -1,56 +1,53 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 // Servicios
-import { PersonaService } from '../../services/persona.service';
+import { UsuarioService } from './../../services/usuario/usuario.service';
 // Modelos
-import { Persona } from '../../models/persona';
+import { Usuario } from '../../models/usuario';
 
 //Servicio para comunicación entre componentes con observables
-import { PersonaSignalServices } from '../../services/persona-signals.service';
-import { PersonaUpdateSignalService } from '../../services/persona-update-signal.service';
-
-
+import { UsuarioSignalService } from './../../services/usuario/usuario-signal.service';
+import { UsuarioUpdateSignalService } from './../../services/usuario/usuario-update-signal.service';
 
 // jquery en angular
 declare var $: any;
 
-@Component({
-  selector: 'app-persona',
-  templateUrl: './persona.component.html',
-  styleUrl: './persona.component.css'
-})
-export class PersonaComponent implements OnInit, OnDestroy {
 
-  public listaPersonas: Persona[] = [];
-  public datosRecibidos: Persona = {} as Persona;
+
+@Component({
+  selector: 'app-usuarios',
+  templateUrl: './usuarios.component.html',
+  styleUrl: './usuarios.component.css'
+})
+export class UsuariosComponent implements OnInit, OnDestroy {
+
+  public listaUsuarios: Usuario[] = [];
+  public datosRecibidos: Usuario = {} as Usuario;
 
   private subscription!: Subscription;
 
-  @ViewChild('myTablePersona', { static: false }) table!: ElementRef;
+  @ViewChild('myTableUsuario', { static: false }) table!: ElementRef;
 
   constructor(
-    private personaServices: PersonaService,
-    private personaSignalServices: PersonaSignalServices,
-    private personaUpdateSignalServices: PersonaUpdateSignalService,
+    private usuarioService: UsuarioService,
+    private usuarioSignalService: UsuarioSignalService,
+    private usuarioUpdateSignalService: UsuarioUpdateSignalService,
     private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-
-    // Recibiendo datos del observable de personaSignalServices
-    this.subscription = this.personaSignalServices.data$.subscribe((data) => {
+    // Recibiendo datos del observable de usuarioSignalService
+    this.subscription = this.usuarioSignalService.data$.subscribe((data) => {
       this.datosRecibidos = data;
-      this.indexPersonas();
+      this.indexUsuarios();
     });
-    this.indexPersonas();
-
+    this.indexUsuarios();
   }
 
   /**
    * btnModalAgregar
    */
   public async btnModalAgregar() {
-
     $('.modal-backdrop').remove(); // Eliminar cualquier instancia de modal-backdrop
 
     await this.mostrarModal(); // Espera a que se muestre el modal
@@ -59,32 +56,29 @@ export class PersonaComponent implements OnInit, OnDestroy {
 
   private mostrarModal(): Promise<void> {
     return new Promise<void>((resolve) => {
-      $('#modal-agregar-persona').modal('show');
+      $('#modal-agregar-usuario').modal('show');
       resolve(); // Resuelve la promesa cuando se muestra el modal
     });
   }
 
-
-
   // Método para cerrar el modal y eliminar instancias huérfanas de modal-backdrop
   public closeModal() {
-    $('#modal-agregar-persona').modal('hide');
+    $('#modal-agregar-usuario').modal('hide');
     $('.modal-backdrop').remove(); // Eliminar cualquier instancia de modal-backdrop
   }
-
 
   /**
    * indexModal
    */
-  public indexPersonas() {
+  public indexUsuarios() {
 
-    this.personaServices.index().subscribe({
+    this.usuarioService.index().subscribe({
       next: (resp: any) => {
 
-        const { persona } = resp;
-        this.listaPersonas = persona.data;
-        this.refreshDataTable();
+        const { usuarios } = resp;
 
+        this.listaUsuarios = usuarios;
+        this.refreshDataTable();
       },
       error: (err) => {
         console.log('error');
@@ -92,42 +86,38 @@ export class PersonaComponent implements OnInit, OnDestroy {
       complete: () => {
         // console.log('complete');
       }
-    })
-
+    });
   }
 
-  public showPersona(id: number) {
+  public showUsuario(id: number) {
+    $('#modal-editar-usuario').modal('show');
 
-    $('#modal-editar-persona').modal('show');
-
-    this.personaServices.show(id).subscribe({
+    this.usuarioService.show(id).subscribe({
       next: (resp: any) => {
-        const { persona } = resp;
+        const { usuario } = resp;
 
         // Emisión de de datos
-        this.personaUpdateSignalServices.sendDataUpdate(persona);
-
+        this.usuarioUpdateSignalService.sendDataUpdate(usuario);
       },
       error: (err) => {
         console.log('error');
       },
       complete: () => {
-        console.log('complete');
+        // console.log('complete');
       }
-    })
+    });
   }
 
   /**
-   * deletePersona
+   * deleteUsuario
    */
-  public deletePersona(id: number) {
-
-    this.personaServices.delete(id).subscribe({
+  public deleteUsuario(id: number) {
+    this.usuarioService.delete(id).subscribe({
       next: (resp: any) => {
         const { status, message } = resp;
         if (status === 'success') {
           toastr.success(`${message}`, 'Web GAMDC');
-          this.indexPersonas();
+          this.indexUsuarios();
         } else {
           toastr.error(`Intente nuevamente`, 'Web GAMDC');
         }
@@ -136,32 +126,31 @@ export class PersonaComponent implements OnInit, OnDestroy {
         console.log('error');
       },
       complete: () => {
-        console.log('complete');
+        // console.log('complete');
       }
-    })
-
+    });
   }
-
-
 
   // Metodo dataTables
   private refreshDataTable() {
-
     const tableElement = this.table.nativeElement;
 
-    if ($.fn.dataTable.isDataTable('#myTablePersona')) {
-      $('#myTablePersona').DataTable().destroy();
+    if ($.fn.dataTable.isDataTable('#myTableUsuario')) {
+      $('#myTableUsuario').DataTable().destroy();
     }
 
-
     $(document).ready(() => {
-      $('#myTablePersona').DataTable({
-        data: this.listaPersonas,
+      $('#myTableUsuario').DataTable({
+        data: this.listaUsuarios,
         columns: [
           { data: 'id' },
-          { data: 'nombres' },
-          { data: 'apellidos' },
-          { data: 'carnet' },
+          { data: 'email' },
+          {
+            data: 'persona_id',
+            render: (data: any, type: any, row: any) => {
+              return row.persona.nombres + ' ' + row.persona.apellidos; // Asume que persona_id es una referencia al id de la persona
+            }
+          },
           {
             data: null,
             render: (data: any, type: any, row: any) => {
@@ -173,7 +162,6 @@ export class PersonaComponent implements OnInit, OnDestroy {
             }
           },
           {
-            // Columna de acciones
             data: null,
             render: (data: any, type: any, row: any) => {
               return `
@@ -193,15 +181,13 @@ export class PersonaComponent implements OnInit, OnDestroy {
         }
       });
 
-
       // Eliminar cualquier controlador de eventos existente antes de agregar uno nuevo
       $(tableElement).off('click', '.edit-btn');
-
 
       // Vincular eventos click después de inicializar DataTable
       $(tableElement).on('click', '.edit-btn', (event: any) => {
         const id = $(event.currentTarget).data('id');
-        this.showPersona(id);
+        this.showUsuario(id);
       });
 
       // Eliminar cualquier controlador de eventos existente antes de agregar uno nuevo
@@ -210,9 +196,8 @@ export class PersonaComponent implements OnInit, OnDestroy {
       // Vincular eventos click después de inicializar DataTable
       $(tableElement).on('click', '.delete-btn', (event: any) => {
         const id = $(event.currentTarget).data('id');
-        this.deletePersona(id);
+        this.deleteUsuario(id);
       });
-
     });
   }
 
@@ -226,7 +211,4 @@ export class PersonaComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
   }
-
-
 }
-

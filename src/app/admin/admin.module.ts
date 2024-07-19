@@ -10,6 +10,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PersonaComponent } from './pages/persona/persona.component';
 import { ModalPersonaComponent } from './pages/persona/modal-persona/modal-persona.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { ModalUsuariosComponent } from './pages/usuarios/modal-usuarios/modal-usuarios.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     PersonaComponent,
     ModalPersonaComponent,
+    UsuariosComponent,
+    ModalUsuariosComponent,
 
   ],
   imports: [

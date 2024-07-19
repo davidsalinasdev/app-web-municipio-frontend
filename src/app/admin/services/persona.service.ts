@@ -27,14 +27,27 @@ export class PersonaService {
     return this.http.get(`${base_url}/api/personas`);
   }
 
-
   /**
    * store
    */
   public store(formData: Persona) {
-
     return this.http.post(`${base_url}/api/personas`, formData);
+  }
 
+  public show(id: number) {
+    return this.http.get(`${base_url}/api/personas/${id}`);
+  }
+
+  public update(formData: any, id: number) {
+    return this.http.put(base_url + `/api/personas/${id}`, formData);
+  }
+
+  public delete(id: number) {
+    return this.http.delete(base_url + `/api/personas/${id}`);
+  }
+
+  public indexEstadoPersonas() {
+    return this.http.get(`${base_url}/api/estado/personas`);
   }
 
 }

@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './admin-footer.component.css'
 })
 export class AdminFooterComponent {
-
+  public getYear() {
+    return new Date().getFullYear();
+  }
 }

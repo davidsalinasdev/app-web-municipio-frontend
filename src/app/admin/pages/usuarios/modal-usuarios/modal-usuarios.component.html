@@ -1,0 +1,165 @@
+<!-- Modal formulario para agregar usuario -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  style="display: none;" aria-hidden="true" id="modal-agregar-usuario">
+  <div class="modal-dialog modal-heading">
+    <div class="modal-content modal-content--borde">
+
+      <form #formDirective="ngForm" [formGroup]="this.formulario" (ngSubmit)="submit(formDirective)">
+
+        <div class="modal-header bg-info modal-content__modal-header--borde">
+          <h4 class="modal-title text-white" id="myLargeModalLabel">Formulario de registro de usuarios</h4>
+          <button type="button" class="close modal-header--close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+
+        <div class="modal-body modal-body--form">
+          <div class="form-group">
+            <label for="persona_id">Funcionario<span class="text-danger">*</span></label>
+
+            <!-- <h5 class="m-t-30">Single select2</h5> -->
+            <select class="select2 form-control custom-select" id="persona-select2" formControlName="persona_id"
+              style="width: 100%; height:36px;">
+
+              <option value="" disabled selected>-Selecionar-</option>
+
+              @for (item of this.listaEstadoPersonas; track item.id) {
+              <option [value]="item.id">{{item.nombres}}</option>
+              } @empty {
+              <li>No hay mas items</li>
+              }
+            </select>
+
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.persona_id?.invalid && (this.persona_id?.dirty || this.persona_id?.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.persona_id?.hasError('required')" class="animated fadeIn fast text-danger font-14" id="">
+                Este campo es requerido.
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label for="email">Email<span class="text-danger">*</span></label>
+            <input type="email" class="form-control form-control" id="email" placeholder="Ingrese su email"
+              formControlName="email">
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.email?.invalid && (this.email?.dirty || this.email?.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.email?.hasError('required')" class="animated fadeIn fast text-danger font-14" id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña<span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña"
+              formControlName="password">
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.password?.invalid && (this.password?.dirty || this.password?.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.password?.hasError('required')" class="animated fadeIn fast text-danger font-14" id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-info m-r-10" [disabled]="this.formulario.invalid">Guardar</button>
+        </div>
+
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.FIN modal formulario para agregar usuario -->
+
+
+<!-- Modal formulario para EDITAR usuario -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  style="display: none;" aria-hidden="true" id="modal-editar-usuario">
+  <div class="modal-dialog modal-heading">
+    <div class="modal-content modal-content--borde">
+
+      <form #formDirectiveUpdate="ngForm" [formGroup]="this.formularioUpdate"
+        (ngSubmit)="submitUpdate(formDirectiveUpdate)">
+
+        <div class="modal-header bg-warning modal-content__modal-header--borde">
+          <h4 class="modal-title text-dark" id="myLargeModalLabel">Modificar registro de usuario</h4>
+          <button type="button" class="close modal-header--close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+
+        <div class="modal-body modal-body--form">
+
+          <div class="form-group">
+            <label for="persona_idUpdate">Funcionario<span class="text-danger">*</span></label>
+
+            <!-- <h5 class="m-t-30">Single select2</h5> -->
+            <select class="select2 form-control custom-select" id="persona_idUpdate" formControlName="persona_idUpdate"
+              style="width: 100%; height:36px;">
+
+              <option value="" disabled selected>-Selecionar-</option>
+
+              @for (item of this.listaEstadoPersonas; track item.id) {
+              <option [value]="item.id">{{item.nombres}}</option>
+              } @empty {
+              <li>No hay mas items</li>
+              }
+            </select>
+
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div
+              *ngIf="this.persona_idUpdate?.invalid && (this.persona_idUpdate?.dirty || this.persona_idUpdate?.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.persona_idUpdate?.hasError('required')" class="animated fadeIn fast text-danger font-14"
+                id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="emailUpdate">Email<span class="text-danger">*</span></label>
+            <input type="email" class="form-control form-control" id="emailUpdate" placeholder="Ingrese su email"
+              formControlName="emailUpdate">
+            <!-- Validacion -->
+            <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+            <div *ngIf="this.emailUpdate?.invalid && (this.emailUpdate?.dirty || this.emailUpdate?.touched)">
+              <!-- Errores con expresiones regulares -->
+              <div *ngIf="this.emailUpdate?.hasError('required')" class="animated fadeIn fast text-danger font-14"
+                id="">
+                Este campo es requerido.
+              </div>
+            </div>
+          </div>
+
+          <!-- Estado -->
+          <div class="form-group">
+            <label for="estadoUpdate">Estado</label>
+            <select class="form-control" id="estadoUpdate" formControlName="estadoUpdate">
+              <option *ngFor="let item of this.estados" [value]="item.value">{{ item.estado }}</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-info m-r-10" [disabled]="this.formularioUpdate.invalid">Guardar</button>
+        </div>
+
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.FIN modal formulario para editar usuario -->
