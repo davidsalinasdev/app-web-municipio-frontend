@@ -1,0 +1,115 @@
+/* Estilos para la sección de Últimas Noticias */
+.ultimas-noticias {
+  background-color: white;
+  /* Fondo blanco para contraste */
+  /* padding: 2em; */
+  text-align: center;
+  color: #003366;
+  /* Texto en color azul oscuro */
+}
+
+.ultimas-noticias h2 {
+  color: #30336b;
+  /* Color del título de la sección */
+  margin-bottom: 1em;
+  text-transform: uppercase;
+  font-size: 2rem !important;
+}
+
+
+
+.noticia {
+  background-color: #f9f9f9;
+  /* Fondo claro para las noticias */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  transition: transform 0.3s;
+}
+
+@media(min-width: 992px) {
+  .noticia {
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+}
+
+.noticia--uno {
+  margin-bottom: 1.2rem;
+}
+
+@media(min-width: 1400px) {
+  .noticia--uno {
+    margin-bottom: 0;
+  }
+}
+
+.noticia:hover {
+  transform: translateY(-10px);
+}
+
+.noticia:hover h3 {
+  color: #eb3b5a
+}
+
+.noticia img {
+  width: 250px;
+  height: 100%;
+  border-radius: 8px;
+  margin-right: 1em;
+  object-fit: cover;
+}
+
+
+@media(min-width: 1400px) {
+  .noticia-imagen__uno {
+    width: 350px !important;
+  }
+
+}
+
+.noticia-content {
+
+  flex: 1;
+  /* border: 1px solid hsl(0, 0%, 6%); */
+}
+
+.noticia h3 {
+  color: rgb(0, 127, 198);
+  /* Color del título de la noticia */
+  margin: 0.5em 0;
+}
+
+.noticia-content__parrafo {
+  font-size: 1.1em;
+  line-height: 1.5;
+  margin-bottom: 1em;
+  color: #0c0b0b;
+  /* Texto gris para la descripción */
+}
+
+
+
+/* Media query para dispositivos móviles */
+@media (max-width: 992px) {
+  .noticia {
+    flex-direction: column;
+  }
+
+  .noticia img {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
+}
+
+/* Estilos adicionales */
+.noticias-pequeñas {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+
+/* FIN Estilos adicionales */

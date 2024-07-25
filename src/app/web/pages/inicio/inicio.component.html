@@ -1,26 +1,30 @@
-<app-navegacion></app-navegacion>
+<!-- ALCALDIA -->
+<!-- <app-navegacion></app-navegacion> -->
 
-<div #header id="header">
+
+<!-- <div #header id="header">
   <app-header></app-header>
-</div>
+</div> -->
+
 
 <!-- <app-television></app-television> -->
 
-<br><br>
+<!-- <br><br>
 <div #interesciudadano>
   @defer (on viewport(interesciudadano)) {
   <app-seccion-interes-ciudadano></app-seccion-interes-ciudadano>
   }
-</div>
+</div> -->
 
-<br><br>
+
+<!-- <br><br>
 <div #noticias>
   @defer (on viewport(noticias)) {
   <app-noticias></app-noticias>
   }
-</div>
+</div> -->
 
-<br><br>
+<!-- <br><br>
 <div #eventos>
   @defer (on viewport(eventos)) {
   <app-eventos></app-eventos>
@@ -60,4 +64,54 @@
   @defer (on viewport(footer)) {
   <app-footer></app-footer>
   }
+</div> -->
+<!-- FIN ALCALDIA -->
+
+<!-- GOBERNACIÓN -->
+<app-navegacion-gadc></app-navegacion-gadc>
+
+<div #header id="header">
+  <app-header-gadc></app-header-gadc>
 </div>
+
+<div class="container" style="max-width: 1600px;">
+
+  <br><br><br>
+  <div #ultimasnoticias>
+    @defer (on viewport(ultimasnoticias)) {
+    <app-ultimas-noticias></app-ultimas-noticias>
+    }
+  </div>
+
+  <br><br><br>
+  <div #television>
+    @defer (on viewport(television)) {
+    <app-television-gadc></app-television-gadc>
+    }
+  </div>
+
+  <br><br><br>
+  <div #pilaresgestion>
+    @defer (on viewport(pilaresgestion)) {
+    <app-pilargestion-gadc></app-pilargestion-gadc>
+    }
+  </div>
+
+  <br><br>
+  <div #gobierno>
+    @defer (on viewport(gobierno)) {
+    <app-gobierno-gadc></app-gobierno-gadc>
+    }
+  </div>
+</div>
+
+
+<br><br>
+<div #footergadc>
+  @defer (on viewport(footergadc)) {
+  <app-footer-gadc></app-footer-gadc>
+  }
+</div>
+
+
+<!-- FIN GOBERNACIÓN -->

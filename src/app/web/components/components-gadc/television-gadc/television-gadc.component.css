@@ -1,0 +1,17 @@
+#video-player {
+  width: 100%;
+  height: auto;
+}
+
+@media(min-width: 992px) {
+  #video-player {
+    width: 60%;
+    height: auto;
+  }
+}
+
+.television__titulo {
+  font-size: 2rem;
+  color: #30336b;
+  text-transform: uppercase;
+}

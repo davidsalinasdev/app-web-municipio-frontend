@@ -1,0 +1,65 @@
+.gobierno__titulo {
+  font-size: 2rem;
+  color: #30336b;
+  text-transform: uppercase;
+}
+
+.secretarias-container {
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* grid-template-rows: repeat(3, 1fr); */
+  grid-gap: 1.8em;
+  margin-top: 2em;
+  margin-bottom: 2em
+    /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 2em;
+  margin-bottom: 2em */
+}
+
+.secretaria {
+  background-color: white;
+  /* Fondo blanco para las tarjetas */
+  border: 1px solid #ccc;
+  /* Borde gris claro */
+  border-radius: 50%;
+  /* Hace que el contenedor sea un círculo */
+  width: 170px;
+  /* Ancho fijo */
+  height: 170px;
+  /* Alto fijo igual al ancho para hacer un círculo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1em;
+  color: #003366;
+  /* Texto en color azul oscuro */
+  margin: auto;
+  /* Centra los círculos dentro de sus contenedores */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.secretaria:hover {
+  transform: translateY(-10px);
+}
+
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+  .secretarias-container {
+    grid-template-columns: 1fr;
+  }
+
+  .secretaria {
+    width: 100px;
+    /* Ajuste de tamaño para dispositivos móviles */
+    height: 100px;
+    /* Ajuste de tamaño para dispositivos móviles */
+  }
+}

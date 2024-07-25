@@ -27,6 +27,14 @@ import { UbicacionComponent } from './components/ubicacion/ubicacion.component';
 import { ContactanosComponent } from './components/contactanos/contactanos.component';
 import { SeccionInteresCiudadanoComponent } from './components/seccion-interes-ciudadano/seccion-interes-ciudadano.component';
 import { TelevisionComponent } from './components/television/television.component';
+import { UltimasNoticiasComponent } from './components/components-gadc/ultimas-noticias/ultimas-noticias.component';
+import { TelevisionGadcComponent } from './components/components-gadc/television-gadc/television-gadc.component';
+import { PilargestionGadcComponent } from './components/components-gadc/pilargestion-gadc/pilargestion-gadc.component';
+import { GobiernoGadcComponent } from './components/components-gadc/gobierno-gadc/gobierno-gadc.component';
+
+
+// Componentes GADC
+
 
 
 @NgModule({
@@ -48,7 +56,11 @@ import { TelevisionComponent } from './components/television/television.componen
     UbicacionComponent,
     ContactanosComponent,
     SeccionInteresCiudadanoComponent,
-    TelevisionComponent
+    TelevisionComponent,
+    UltimasNoticiasComponent,
+    TelevisionGadcComponent,
+    PilargestionGadcComponent,
+    GobiernoGadcComponent
   ],
   imports: [
     CommonModule,

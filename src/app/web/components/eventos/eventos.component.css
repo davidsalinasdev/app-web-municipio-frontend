@@ -35,7 +35,6 @@
    width: 100%;
    object-fit: cover;
    height: 100%;
-   /* Ajusta la imagen para que llene toda la altura */
  }
 
  @media(min-width: 768px) {
