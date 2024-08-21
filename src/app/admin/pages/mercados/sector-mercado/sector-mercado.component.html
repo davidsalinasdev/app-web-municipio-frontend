@@ -1,0 +1,32 @@
+<!-- Lista de datos de la tabla Persona -->
+
+<div class="d-flex justify-content-between animated fadeIn fast">
+
+  <div class="titulo-principal">
+    <h4 class="card-title">Administración de titulares de puestos de mercado</h4>
+    <h6 class="card-subtitle">Lista de datos de la tabla Titulares</h6>
+  </div>
+
+  <div class="btn-agregar">
+    <button class="btn btn-info" (click)="this.btnModalAgregar()"><i class="fa fa-plus"></i> Agregar</button>
+  </div>
+
+</div>
+
+<table datatable [dtOptions]="this.dtOptions" class="row-border hover" id="myTableTitulars">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Identificador</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Carnet</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+

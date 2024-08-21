@@ -1,0 +1,43 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+
+    <div class="title mb-4">
+      Gestión sección de ultimas noticias
+    </div>
+
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-md-4">
+        <form #formDirective="ngForm" [formGroup]="this.formulario" (ngSubmit)="submit(formDirective)">
+
+          <div class="form-group">
+            <label for="seccion">Sección noticias</label>
+            <input type="text" class="form-control" id="seccion" placeholder="Ingrese un nombre de sección">
+          </div>
+
+        </form>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="table-responsive m-t-40 animated fadeIn fast">
+          <table #myTableSeccion id="myTableSeccion" class="table table-bordered table--largo">
+            <thead class="table__thead">
+              <tr>
+                <th style="width: 10%;">Identificador</th>
+                <th style="width: 25%;">Nombre sección</th>
+                <th style="width: 25%;">Descripción sección</th>
+                <th style="width: 25%;">Estado</th>
+                <th style="width: 10%;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- DATATABLES -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

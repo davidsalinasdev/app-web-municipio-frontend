@@ -62,12 +62,19 @@ export class LoginComponent implements OnInit {
     this.loginServices.login(formData).subscribe({
       next: (resp: any) => {
 
+        console.log(resp);
+
         if (resp.token) {
+
+          // Alamacenando token y usuario en localStorage para manejo global de estos datos
           localStorage.setItem('token', resp.token);
+          localStorage.setItem('usuario', JSON.stringify(resp.user));
+
           this.router.navigate(['/admin/dashboard']);
           setTimeout(() => {
             this.loading = false; // Ocultar el preloader si ya llego una respuesta
           }, 5000);
+
         }
 
       },

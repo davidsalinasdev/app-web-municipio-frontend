@@ -42,17 +42,20 @@
             ],
             "styles": [
               "src/styles.css",
-
+              "node_modules/datatables.net-dt/css/dataTables.dataTables.min.css",
               "node_modules\\bootstrap-icons\\font\\bootstrap-icons.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/toastr/build/toastr.css",
               "node_modules/select2/dist/css/select2.min.css"
+
             ],
             "scripts": [
               "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
               "node_modules/fslightbox/index.js",
               "node_modules/toastr/build/toastr.min.js",
-              "node_modules/select2/dist/js/select2.min.js"
+              "node_modules/select2/dist/js/select2.min.js",
+              "node_modules/datatables.net/js/dataTables.min.js"
+
             ]
           },
           "configurations": {
@@ -117,5 +120,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a3fd3744-6e83-4ecd-ac14-e1ac72eefdcd"
   }
 }

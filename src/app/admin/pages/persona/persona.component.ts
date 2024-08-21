@@ -10,7 +10,6 @@ import { PersonaSignalServices } from '../../services/persona-signals.service';
 import { PersonaUpdateSignalService } from '../../services/persona-update-signal.service';
 
 
-
 // jquery en angular
 declare var $: any;
 
