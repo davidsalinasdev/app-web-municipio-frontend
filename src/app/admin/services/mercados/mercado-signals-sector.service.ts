@@ -1,22 +1,22 @@
 
-// data.service.ts
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { TitularPuesto } from '../../models/titular-puesto';
+import { SectorMercado } from '../../models/sector-mercado';
 
 @Injectable({ providedIn: 'root' })
 
-export class MercadoSignalServices {
+export class MercadoSignalSectorServices {
 
-  private dataSubject = new Subject<TitularPuesto>();
+  private dataSubject = new Subject<SectorMercado>();
 
   data$ = this.dataSubject.asObservable();
 
   // Titulares
-  sendData(data: TitularPuesto) {
+  sendData(data: SectorMercado) {
     this.dataSubject.next(data);
   }
+
 
 }
 

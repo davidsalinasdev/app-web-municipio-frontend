@@ -48,7 +48,7 @@ export class SidebarService {
       submenu: [
         { titulo: 'Titular', url: '/admin/dashboard/titular-puesto-mercado' },
         { titulo: 'Sector', url: '/admin/dashboard/sector-mercado' },
-        { titulo: 'Gestion cobros', url: '/admin/dashboard/gestion-cobros' },
+        { titulo: 'Puestos', url: '/admin/dashboard/puesto-mercado' },
         // { titulo: 'ProgressBar', url: 'progress' },
         // { titulo: 'Gráficas', url: 'grafica1' },
       ]

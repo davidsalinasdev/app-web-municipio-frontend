@@ -21,6 +21,14 @@ export class TitularService {
 
 
   /**
+   * index
+   */
+  public index() {
+    return this.http.get(`${base_url}/api/mercado-titular`);
+  }
+
+
+  /**
    * indexPost
    */
   public indexPost(dataTablesParametros: any) {

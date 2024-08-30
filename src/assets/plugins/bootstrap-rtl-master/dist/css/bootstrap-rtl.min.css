@@ -4899,8 +4899,8 @@ button.close {
 }
 
 @media (min-width: 992px) {
-  .modal-lg {
-    max-width: 800px;
+  .listaSector {
+    max-width: 1200px;
   }
 }
 
@@ -14173,7 +14173,7 @@ button.close {
     }
 }
 @media(min-width:992px) {
-    .modal-lg {
+    .listaSector {
         width: 900px
     }
 }

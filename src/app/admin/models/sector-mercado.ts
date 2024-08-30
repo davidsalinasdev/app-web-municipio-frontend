@@ -1,7 +1,8 @@
 export interface SectorMercado {
     id?: number;
+    mercado: string;
     sector: string;
-    decripcion: string;
+    descripcion: string;
     usuario_id?: number;
     estado?: number;
 }

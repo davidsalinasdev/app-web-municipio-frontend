@@ -8,6 +8,7 @@ import { UltimasNoticiasComponent } from './pages/ultimas-noticias/ultimas-notic
 import { TitularMercadoComponent } from './pages/mercados/titular-mercado/titular-mercado.component';
 import { SectorMercadoComponent } from './pages/mercados/sector-mercado/sector-mercado.component';
 import { GestionMercadoComponent } from './pages/mercados/gestion-mercado/gestion-mercado.component';
+import { PuestoMercadoComponent } from './pages/mercados/puesto-mercado/puesto-mercado.component';
 
 
 
@@ -27,6 +28,7 @@ const childRoutes: Routes = [
     { path: 'titular-puesto-mercado', component: TitularMercadoComponent, data: { titulo: 'Gestión Titular Puesto Mercado' } },
     { path: 'sector-mercado', component: SectorMercadoComponent, data: { titulo: 'Gestión Sector Mercado' } },
     { path: 'gestion-mercado', component: GestionMercadoComponent, data: { titulo: 'Gestión Mercados' } },
+    { path: 'puesto-mercado', component: PuestoMercadoComponent, data: { titulo: 'Gestión Puesto de Mercado' } },
 
 
 ];

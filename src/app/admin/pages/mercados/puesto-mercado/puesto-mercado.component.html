@@ -1,0 +1,35 @@
+<!-- Lista de datos de la tabla Persona -->
+
+<div class="d-flex justify-content-between animated fadeIn fast">
+
+    <div class="titulo-principal">
+        <h4 class="card-title">Administración de puestos de mercados</h4>
+        <h6 class="card-subtitle">Lista de datos de puestos de mercado</h6>
+    </div>
+
+    <div class="btn-agregar">
+        <button class="btn btn-info" (click)="this.btnModalAgregar()"><i class="fa fa-plus"></i> Agregar</button>
+    </div>
+
+</div>
+
+<table datatable [dtOptions]="this.dtOptions" class="row-border hover" id="myTablePuesto">
+    <thead>
+        <tr>
+            <th>#</th>
+            <!-- <th>Identificador</th> -->
+            <th>Nro. puesto</th>
+            <!-- <th>Sector</th> -->
+            <th>Titular</th>
+            <!-- <th>Precio mensual</th> -->
+            <th>Fecha ingreso</th>
+            <th>Nro. contrato</th>
+            <!-- <th>observaciones</th> -->
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Aqui la logica de la tabla de datos -->
+    </tbody>
+</table>

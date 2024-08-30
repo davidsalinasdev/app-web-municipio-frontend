@@ -1,10 +1,8 @@
-
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
 import { DataTableDirective } from 'angular-datatables';
 import { Config } from "datatables.net";
-
 
 // Servicios
 import { SectorService } from '../../../services/mercados/sector.service';
@@ -13,12 +11,14 @@ import { SectorService } from '../../../services/mercados/sector.service';
 import { SectorMercado } from '../../../models/sector-mercado';
 
 //Servicio para comunicación entre componentes con observables
-import { MercadoSignalServices } from '../../../services/mercados/mercado-signals.service';
-import { MercadoUpdateSignalService } from '../../../services/mercados/mercado-update-signal.service';
+import { MercadoSignalSectorServices } from '../../../services/mercados/mercado-signals-sector.service';
+import { MercadoUpdateSignalSectorService } from '../../../services/mercados/mercado-update-signal-sector.service';
+
+// Para renderizar el Dom
+import { Renderer2 } from '@angular/core'; // Importar Renderer2
 
 // jquery en angular
 declare var $: any;
-
 
 @Component({
   selector: 'app-sector-mercado',
@@ -27,10 +27,10 @@ declare var $: any;
 })
 export class SectorMercadoComponent implements OnInit, OnDestroy {
 
-  public listaPersonas: TitularPuesto[] = [];
+  public listaSector: SectorMercado[] = [];
 
-  public listaTitularPuestos: TitularPuesto[] = [];
-  public datosRecibidos: TitularPuesto = {} as TitularPuesto;
+  public listaSectorMercado: SectorMercado[] = [];
+  public datosRecibidos: SectorMercado = {} as SectorMercado;
 
   private subscription!: Subscription;
 
@@ -49,26 +49,21 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private titularServices: TitularService,
-    private mercadoSignalServices: MercadoSignalServices,
-    private mercadoUpdateSignalServices: MercadoUpdateSignalService,
+    private sectorServices: SectorService,
+    private mercadoSignalSectorServices: MercadoSignalSectorServices,
+    private mercadoUpdateSignalSectorServices: MercadoUpdateSignalSectorService,
+    private renderer: Renderer2 // Inyectar Renderer2
   ) { }
 
 
-
-
   ngOnInit(): void {
-
     // Recibiendo datos del observable de personaSignalServices
-    this.subscription = this.mercadoSignalServices.data$.subscribe((data) => {
+    this.subscription = this.mercadoSignalSectorServices.data$.subscribe((data) => {
       this.datosRecibidos = data;
-      // this.indexPersona(this.currentPage);
       this.indexmejorado();
     });
     this.indexmejorado();
-    // this.indexPersona(this.currentPage);
   }
-
 
   /**
    * indexmejorado
@@ -88,7 +83,7 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
 
         dataTablesParameters.search = dataTablesParameters.search.value;
 
-        this.titularServices.indexPost(dataTablesParameters).subscribe({
+        this.sectorServices.indexPost(dataTablesParameters).subscribe({
 
           next: (resp: any) => {
 
@@ -99,7 +94,7 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
               recordsFiltered: details.recordsFiltered,
               data: details.data,
             });
-            this.initTooltips(); // Inicializar tooltips después de cargar los datos
+            // this.initTooltips(); // Inicializar tooltips después de cargar los datos
           },
           error: (err: any) => {
             console.log(err);
@@ -107,14 +102,13 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
           // complete: () => console.info('complete')
         })
 
-
       },
       columns: [
         { data: null }, // Este será el índice de la fila
         { data: 'id' },
-        { data: 'nombres' },
-        { data: 'apellidos' },
-        { data: 'carnet' },
+        { data: 'mercado' },
+        { data: 'sector' },
+        { data: 'descripcion' },
         {
           data: null,
           render: (data: any, type: any, row: any) => {
@@ -130,10 +124,10 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
           data: null,
           render: (data: any, type: any, row: any) => {
             return `
-                    <button class="btn btn-warning edit-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Modificar" >
+                    <button class="btn btn-warning sector-edit-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Modificar" >
                       <i class="fa fa-edit text-dark"></i>
                     </button>
-                    <button class="btn btn-danger delete-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Deshabilitar">
+                    <button class="btn btn-danger sector-delete-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Deshabilitar">
                       <i class="fa fa-trash"></i>
                     </button>
                   `;
@@ -150,27 +144,28 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
             return meta.row + meta.settings._iDisplayStart + 1;
           }
         }
-      ]
+      ],
+
+      drawCallback: () => {
+
+        // Remove previous listeners to avoid multiple bindings
+        $(document).off('click', '.sector-delete-btn');
+        $(document).off('click', '.sector-edit-btn');
+
+        // Evento btn editar
+        $(document).on('click', '.sector-edit-btn', (event: any) => {
+          const id = $(event.currentTarget).data('id');
+          this.showSector(id);
+        });
+
+        // Evento btn dar de baja
+        $(document).on('click', '.sector-delete-btn', (event: any) => {
+          const id = $(event.currentTarget).data('id');
+          this.deleteSector(id);
+        });
+      }
     };
-
-
-    $(document).on('click', '.edit-btn', (event: any) => {
-      const id = $(event.currentTarget).data('id');
-      this.showPersona(id);
-    });
-
-    $(document).on('click', '.delete-btn', (event: any) => {
-      const id = $(event.currentTarget).data('id');
-      this.deletePersona(id);
-    });
-
   }
-
-  private initTooltips() {
-    // Inicializar tooltips después de que los elementos se hayan agregado al DOM
-    $('[data-toggle="tooltip"]').tooltip();
-  }
-
 
   /**
    * btnModalAgregar
@@ -185,39 +180,36 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
 
   private mostrarModal(): Promise<void> {
     return new Promise<void>((resolve) => {
-      $('#modal-agregar-titular').modal('show');
+      $('#modal-agregar-sector').modal('show');
       resolve(); // Resuelve la promesa cuando se muestra el modal
     });
   }
 
-
-
   // Método para cerrar el modal y eliminar instancias huérfanas de modal-backdrop
   public closeModal() {
-    $('#modal-agregar-titular').modal('hide');
+    $('#modal-agregar-sector').modal('hide');
     $('.modal-backdrop').remove(); // Eliminar cualquier instancia de modal-backdrop
   }
 
 
+  public showSector(id: number) {
 
-  public showPersona(id: number) {
+    $('#modal-editar-sector').modal('show');
 
-    $('#modal-editar-titular').modal('show');
-
-    this.titularServices.show(id).subscribe({
+    this.sectorServices.show(id).subscribe({
       next: (resp: any) => {
 
-        const { titular } = resp;
+        const { sector } = resp;
 
         // Emisión de de datos
-        this.mercadoUpdateSignalServices.sendDataUpdate(titular);
+        this.mercadoUpdateSignalSectorServices.sendDataUpdate(sector);
 
       },
       error: (err) => {
         console.log('error');
       },
       complete: () => {
-        console.log('complete');
+        // console.log('complete');
       }
     })
   }
@@ -225,16 +217,16 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
   /**
    * deletePersona
    */
-  public deletePersona(id: number) {
+  public deleteSector(id: number) {
 
-    this.titularServices.delete(id).subscribe({
+    this.sectorServices.delete(id).subscribe({
       next: (resp: any) => {
         const { status, message } = resp;
         if (status === 'success') {
           toastr.success(`${message}`, 'Web GAMDC');
 
           // Después de una eliminación exitosa
-          $('#myTableTitulars').DataTable().ajax.reload(null, false);
+          $('#myTableSector').DataTable().ajax.reload(null, false);
         } else {
           toastr.error(`Intente nuevamente`, 'Web GAMDC');
         }
@@ -243,18 +235,21 @@ export class SectorMercadoComponent implements OnInit, OnDestroy {
         console.log('error');
       },
       complete: () => {
-        console.log('complete');
+        // console.log('complete');
       }
     })
   }
-
-
 
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+    // Limpiar los eventos
+    $(document).off('click', '.titular-edit-btn');
+    $(document).off('click', '.titular-delete-btn');
+    $(document).off('click', '.sector-edit-btn');
+    $(document).off('click', '.sector-delete-btn');
   }
 
 }

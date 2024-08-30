@@ -21,6 +21,8 @@ import { TitularMercadoComponent } from './pages/mercados/titular-mercado/titula
 import { GestionMercadoComponent } from './pages/mercados/gestion-mercado/gestion-mercado.component';
 import { ModalTitularComponent } from './pages/mercados/titular-mercado/modal-titular/modal-titular.component';
 import { ModalSectorComponent } from './pages/mercados/sector-mercado/modal-sector/modal-sector.component';
+import { ModalPuestoComponent } from './pages/mercados/puesto-mercado/modal-puesto/modal-puesto.component';
+import { PuestoMercadoComponent } from './pages/mercados/puesto-mercado/puesto-mercado.component';
 
 
 
@@ -37,7 +39,9 @@ import { ModalSectorComponent } from './pages/mercados/sector-mercado/modal-sect
     TitularMercadoComponent,
     GestionMercadoComponent,
     ModalTitularComponent,
-    ModalSectorComponent
+    ModalSectorComponent,
+    ModalPuestoComponent,
+    PuestoMercadoComponent
   ],
   imports: [
     CommonModule,

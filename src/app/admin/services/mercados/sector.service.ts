@@ -20,6 +20,14 @@ export class SectorService {
   ) { }
 
   /**
+    * index
+    */
+  public index() {
+    return this.http.get(`${base_url}/api/mercado-sector`);
+  }
+
+
+  /**
    * indexPost
    */
   public indexPost(dataTablesParametros: any) {

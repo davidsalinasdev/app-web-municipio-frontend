@@ -1,39 +1,38 @@
-
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
 import { DataTableDirective } from 'angular-datatables';
 import { Config } from "datatables.net";
 
-
 // Servicios
+import { PuestoService } from '../../../services/mercados/puesto.service';
+import { SectorService } from '../../../services/mercados/sector.service';
 import { TitularService } from '../../../services/mercados/titular.service';
 
 // Modelos
-import { TitularPuesto } from '../../../models/titular-puesto';
+import { PuestoMercado } from '../../../models/puesto-mercado';
 
 //Servicio para comunicación entre componentes con observables
-import { MercadoSignalServices } from '../../../services/mercados/mercado-signals.service';
-import { MercadoUpdateSignalService } from '../../../services/mercados/mercado-update-signal.service';
+import { MercadoSignalPuestoService } from '../../../services/mercados/mercado-signals-puesto.service';
+import { MercadoUpdateSignalPuestoService } from '../../../services/mercados/mercado-update-signal-puesto.service';
+import { IndexSectorSignalService } from '../../../services/mercados/index-sector-signal.service';
+import { IndexTitularSignalService } from '../../../services/mercados/index-titular-signal.service';
 
-
-// Para renderizar el Dom
-import { Renderer2 } from '@angular/core'; // Importar Renderer2
 
 // jquery en angular
 declare var $: any;
 
 @Component({
-  selector: 'app-persona',
-  templateUrl: './titular-mercado.component.html',
-  styleUrl: './titular-mercado.component.css'
+  selector: 'app-puesto-mercado',
+  templateUrl: './puesto-mercado.component.html',
+  styleUrl: './puesto-mercado.component.css'
 })
-export class TitularMercadoComponent implements OnInit, OnDestroy {
+export class PuestoMercadoComponent implements OnInit, OnDestroy {
 
-  public listaPersonas: TitularPuesto[] = [];
+  public listaPuesto: PuestoMercado[] = [];
 
-  public listaTitularPuestos: TitularPuesto[] = [];
-  public datosRecibidos: TitularPuesto = {} as TitularPuesto;
+  public listaPuestoMercado: PuestoMercado[] = [];
+  public datosRecibidos: PuestoMercado = {} as PuestoMercado;
 
   private subscription!: Subscription;
 
@@ -52,23 +51,23 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    private puestoServices: PuestoService,
+    private mercadoSignalPuestoServices: MercadoSignalPuestoService,
+    private mercadoUpdateSignalPuestoServices: MercadoUpdateSignalPuestoService,
+    private sectorServices: SectorService,
     private titularServices: TitularService,
-    private mercadoSignalServices: MercadoSignalServices,
-    private mercadoUpdateSignalServices: MercadoUpdateSignalService,
-    private renderer: Renderer2 // Inyectar Renderer2
+    private indexSectorSignalServices: IndexSectorSignalService,
+    private indexTitularSignalServices: IndexTitularSignalService
   ) { }
 
 
   ngOnInit(): void {
-
     // Recibiendo datos del observable de personaSignalServices
-    this.subscription = this.mercadoSignalServices.data$.subscribe((data) => {
+    this.subscription = this.mercadoSignalPuestoServices.data$.subscribe((data) => {
       this.datosRecibidos = data;
-      // this.indexPersona(this.currentPage);
       this.indexmejorado();
     });
     this.indexmejorado();
-    // this.indexPersona(this.currentPage);
   }
 
   /**
@@ -89,7 +88,7 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
 
         dataTablesParameters.search = dataTablesParameters.search.value;
 
-        this.titularServices.indexPost(dataTablesParameters).subscribe({
+        this.puestoServices.indexPost(dataTablesParameters).subscribe({
 
           next: (resp: any) => {
 
@@ -108,14 +107,19 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
           // complete: () => console.info('complete')
         })
 
-
       },
       columns: [
         { data: null }, // Este será el índice de la fila
-        { data: 'id' },
-        { data: 'nombres' },
-        { data: 'apellidos' },
-        { data: 'carnet' },
+        { data: 'nro_puesto' },
+        // { data: 'titular_id' },
+        {
+          data: null,
+          render(data, type, row, meta) {
+            return data.titular.nombres + ' ' + data.titular.apellidos;
+          },
+        },
+        { data: 'fecha_ingreso' },
+        { data: 'nro_contrato' },
         {
           data: null,
           render: (data: any, type: any, row: any) => {
@@ -131,10 +135,13 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
           data: null,
           render: (data: any, type: any, row: any) => {
             return `
-                    <button class="btn btn-warning titular-edit-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Modificar" >
+                    <button class="btn btn-warning puesto-edit-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Modificar" >
                       <i class="fa fa-edit text-dark"></i>
                     </button>
-                    <button class="btn btn-danger titular-delete-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Deshabilitar">
+                      <button class="btn btn-info puesto-show-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Ver información" >
+                      <i class="fa fa-eye text-white"></i>
+                    </button>
+                    <button class="btn btn-danger puesto-delete-btn" data-id="${row.id}" data-toggle="tooltip" data-placement="left" title="Deshabilitar">
                       <i class="fa fa-trash"></i>
                     </button>
                   `;
@@ -152,21 +159,30 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
           }
         }
       ],
+
       drawCallback: () => {
+
         // Remove previous listeners to avoid multiple bindings
-        $(document).off('click', '.titular-delete-btn');
-        $(document).off('click', '.titular-edit-btn');
+        $(document).off('click', '.puesto-edit-btn');
+        $(document).off('click', '.puesto-show-btn');
+        $(document).off('click', '.puesto-delete-btn');
 
         // Evento btn editar
-        $(document).on('click', '.titular-edit-btn', (event: any) => {
+        $(document).on('click', '.puesto-edit-btn', (event: any) => {
           const id = $(event.currentTarget).data('id');
-          this.showPersona(id);
+          this.showPuesto(id);
+        });
+
+        // Evento btn ver datos
+        $(document).on('click', '.puesto-show-btn', (event: any) => {
+          const id = $(event.currentTarget).data('id');
+          this.mostrarPuesto(id);
         });
 
         // Evento btn dar de baja
-        $(document).on('click', '.titular-delete-btn', (event: any) => {
+        $(document).on('click', '.puesto-delete-btn', (event: any) => {
           const id = $(event.currentTarget).data('id');
-          this.deletePersona(id);
+          this.deletePuesto(id);
         });
       }
     };
@@ -176,37 +192,78 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
    * btnModalAgregar
    */
   public async btnModalAgregar() {
+
     $('.modal-backdrop').remove(); // Eliminar cualquier instancia de modal-backdrop
+
     await this.mostrarModal(); // Espera a que se muestre el modal
     // Aquí puedes realizar otras acciones después de que se muestre el modal
+
+    //  Carga y envio de datos al modal mediante el observable
+    // SECTOR
+    this.sectorServices.index().subscribe({
+
+      next: (resp: any) => {
+
+        const { sector } = resp;
+
+        // Emisión de de datos al modal sector
+        this.indexSectorSignalServices.sendData(sector);
+
+      },
+      error: (err) => {
+        console.log('error');
+      },
+
+      complete: () => {
+        // console.log('complete');
+      }
+    })
+
+    // TITULAR
+    this.titularServices.index().subscribe({
+      next: (resp: any) => {
+
+        const { titular } = resp;
+        // Emisión de de datos al modal titular
+        this.indexTitularSignalServices.sendData(titular);
+
+      },
+      error: (err) => {
+        console.log('error');
+      },
+      complete: () => {
+        // console.log('complete');
+      }
+    })
+
   }
 
   private mostrarModal(): Promise<void> {
     return new Promise<void>((resolve) => {
-      $('#modal-agregar-titular').modal('show');
+      $('#modal-agregar-puesto').modal('show');
       resolve(); // Resuelve la promesa cuando se muestra el modal
     });
   }
 
-
-
   // Método para cerrar el modal y eliminar instancias huérfanas de modal-backdrop
   public closeModal() {
-    $('#modal-agregar-titular').modal('hide');
+    $('#modal-agregar-puesto').modal('hide');
     $('.modal-backdrop').remove(); // Eliminar cualquier instancia de modal-backdrop
   }
 
 
+  public showPuesto(id: number) {
 
-  public showPersona(id: number) {
+    $('#modal-editar-puesto').modal('show');
 
-    $('#modal-editar-titular').modal('show');
-
-    this.titularServices.show(id).subscribe({
+    this.puestoServices.show(id).subscribe({
       next: (resp: any) => {
-        const { titular } = resp;
+
+        const { sector } = resp;
+
         // Emisión de de datos
-        this.mercadoUpdateSignalServices.sendDataUpdate(titular);
+        this.mercadoUpdateSignalPuestoServices.sendDataUpdate(sector);
+
       },
       error: (err) => {
         console.log('error');
@@ -218,17 +275,25 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * mostrarPuesto
+   */
+  public mostrarPuesto(id: number) {
+    console.log('prueba mostrar puesto');
+  }
+
+  /**
    * deletePersona
    */
-  public deletePersona(id: number) {
-    this.titularServices.delete(id).subscribe({
+  public deletePuesto(id: number) {
+
+    this.puestoServices.delete(id).subscribe({
       next: (resp: any) => {
         const { status, message } = resp;
         if (status === 'success') {
           toastr.success(`${message}`, 'Web GAMDC');
 
           // Después de una eliminación exitosa
-          $('#myTableTitulars').DataTable().ajax.reload(null, false);
+          $('#myTableSector').DataTable().ajax.reload(null, false);
         } else {
           toastr.error(`Intente nuevamente`, 'Web GAMDC');
         }
@@ -252,6 +317,10 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
     $(document).off('click', '.titular-delete-btn');
     $(document).off('click', '.sector-edit-btn');
     $(document).off('click', '.sector-delete-btn');
+
+    $(document).off('click', '.puesto-edit-btn');
+    $(document).off('click', '.puesto-show-btn');
+    $(document).off('click', '.puesto-delete-btn');
   }
 
 }

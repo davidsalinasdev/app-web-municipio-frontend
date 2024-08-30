@@ -1,1 +1,186 @@
-<p>modal-sector works!</p>
+<!-- Modal formulario para agregar sector -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true" id="modal-agregar-sector">
+    <div class="modal-dialog modal-heading">
+        <div class="modal-content modal-content--borde">
+
+            <form #formDirective="ngForm" [formGroup]="this.formulario" (ngSubmit)="submit(formDirective)">
+
+                <div class="modal-header bg-info modal-content__modal-header--borde">
+                    <h4 class="modal-title text-white" id="myLargeModalLabel">Registro de sector de mercado</h4>
+                    <button type="button" class="close modal-header--close" data-dismiss="modal" inert
+                        aria-hidden="true">x</button>
+                </div>
+
+                <div class="modal-body modal-body--form">
+
+                    <div class="form-group">
+                        <label for="mercado-select2">Mercado<span class="text-danger">*</span></label>
+
+                        <!-- <h5 class="m-t-30">Single select2</h5> -->
+                        <select class="select2 form-control custom-select" id="mercado-select2"
+                            formControlName="mercado" style="width: 100%; height:36px;">
+                            <option value="" disabled selected>-Selecionar-</option>
+                            <option value="interno">Mercado Interno</option>
+                            <option value="externo">Mercado Externo</option>
+
+                        </select>
+
+                        <!-- Validacion -->
+                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+                        <div *ngIf="this.mercado?.invalid && (this.mercado?.dirty || this.mercado?.touched)">
+                            <!-- Errores con expresiones regulares -->
+                            <div *ngIf="this.mercado?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14" id="">
+                                Este campo es requerido.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Sector -->
+                    <div class="form-group">
+                        <label for="sector-sector">Sector<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control" id="sector-sector"
+                            placeholder="Ingrese el sector" formControlName="sector">
+                        <!-- Validacion -->
+                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+                        <div *ngIf="this.sector?.invalid && (this.sector?.dirty || this.sector?.touched)">
+                            <!-- Errores con expresiones regulares -->
+                            <div *ngIf="this.sector?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14" id="">
+                                Este campo es requerido.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion-sector">Descripción<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="descripcion-sector"
+                            placeholder="Ingrese una descripción" formControlName="descripcion">
+                        <!-- Validacion -->
+                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+                        <div
+                            *ngIf="this.descripcion?.invalid && (this.descripcion?.dirty || this.descripcion?.touched)">
+                            <!-- Errores con expresiones regulares -->
+                            <div *ngIf="this.descripcion?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14" id="">
+                                Este campo es requerido.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-info m-r-10"
+                        [disabled]="this.formulario.invalid">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.FIN modal formulario para agregar sector -->
+
+
+<!-- Modal formulario para EDITAR sector -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    style="display: none;" aria-hidden="true" id="modal-editar-sector">
+    <div class="modal-dialog modal-heading">
+        <div class="modal-content modal-content--borde">
+
+            <form #formDirectiveUpdate="ngForm" [formGroup]="this.formularioUpdate"
+                (ngSubmit)="submitUpdate(formDirectiveUpdate)">
+
+                <div class="modal-header bg-warning modal-content__modal-header--borde">
+                    <h4 class="modal-title text-dark" id="myLargeModalLabel">Modificar registro de sector de mercado
+                    </h4>
+                    <button type="button" class="close modal-header--close" data-dismiss="modal" inert
+                        aria-hidden="true">x</button>
+                </div>
+
+                <div class="modal-body modal-body--form">
+
+                    <div class="form-group">
+                        <label for="mercadoUpdate-select2">Mercado<span class="text-danger">*</span></label>
+
+                        <!-- <h5 class="m-t-30">Single select2</h5> -->
+                        <select class="select2 form-control custom-select" id="mercadoUpdate-select2"
+                            formControlName="mercadoUpdate" style="width: 100%; height:36px;">
+                            <option value="" disabled selected>-Selecionar-</option>
+                            <option value="interno">Mercado Interno</option>
+                            <option value="externo">Mercado Externo</option>
+
+                        </select>
+
+                        <!-- Validacion -->
+                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+                        <div
+                            *ngIf="this.mercadoUpdate?.invalid && (this.mercadoUpdate?.dirty || this.mercadoUpdate?.touched)">
+                            <!-- Errores con expresiones regulares -->
+                            <div *ngIf="this.mercadoUpdate?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14" id="">
+                                Este campo es requerido.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sectorUpdateSector">Sector<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control" id="sectorUpdateSector"
+                            placeholder="Ingrese el sector de mercado" formControlName="sectorUpdate">
+                        <!-- Validacion -->
+                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+                        <div
+                            *ngIf="this.sectorUpdate?.invalid && (this.sectorUpdate?.dirty || this.sectorUpdate?.touched)">
+                            <!-- Errores con expresiones regulares -->
+                            <div *ngIf="this.sectorUpdate?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14" id="">
+                                Este campo es requerido.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcionUpdateSector">Apellidos<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="descripcionUpdateSector"
+                            placeholder="Ingrese una descripción" formControlName="descripcionUpdate">
+                        <!-- Validacion -->
+                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+                        <div
+                            *ngIf="this.descripcionUpdate?.invalid && (this.descripcionUpdate?.dirty || this.descripcionUpdate?.touched)">
+                            <!-- Errores con expresiones regulares -->
+                            <div *ngIf="this.descripcionUpdate?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14" id="">
+                                Este campo es requerido.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="form-group">
+                        <label for="estadoSector">Estado</label>
+                        <select class="form-control" id="estadoSector" formControlName="estadoUpdate">
+                            <option *ngFor="let item of this.estados" [value]="item.value">{{ item.estado }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-info m-r-10"
+                        [disabled]="this.formularioUpdate.invalid">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.FIN modal formulario para editar persona -->
