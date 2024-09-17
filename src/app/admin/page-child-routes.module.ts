@@ -9,6 +9,7 @@ import { TitularMercadoComponent } from './pages/mercados/titular-mercado/titula
 import { SectorMercadoComponent } from './pages/mercados/sector-mercado/sector-mercado.component';
 import { GestionMercadoComponent } from './pages/mercados/gestion-mercado/gestion-mercado.component';
 import { PuestoMercadoComponent } from './pages/mercados/puesto-mercado/puesto-mercado.component';
+import { GenerarCobroComponent } from './pages/mercados/generar-cobro/generar-cobro.component';
 
 
 
@@ -29,6 +30,7 @@ const childRoutes: Routes = [
     { path: 'sector-mercado', component: SectorMercadoComponent, data: { titulo: 'Gestión Sector Mercado' } },
     { path: 'gestion-mercado', component: GestionMercadoComponent, data: { titulo: 'Gestión Mercados' } },
     { path: 'puesto-mercado', component: PuestoMercadoComponent, data: { titulo: 'Gestión Puesto de Mercado' } },
+    { path: 'generar-cobro', component: GenerarCobroComponent, data: { titulo: 'Generar cobro de Mercado' } },
 
 
 ];

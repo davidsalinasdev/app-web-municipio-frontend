@@ -6,6 +6,7 @@ export interface PuestoMercado {
     usuario_id?: number;
     precio_mensual: string;
     fecha_ingreso: string;
+    fecha_registro?: string;
     nro_contrato: string;
     observaciones: string;
     estado?: number;

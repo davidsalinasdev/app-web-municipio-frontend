@@ -23,6 +23,7 @@ import { ModalTitularComponent } from './pages/mercados/titular-mercado/modal-ti
 import { ModalSectorComponent } from './pages/mercados/sector-mercado/modal-sector/modal-sector.component';
 import { ModalPuestoComponent } from './pages/mercados/puesto-mercado/modal-puesto/modal-puesto.component';
 import { PuestoMercadoComponent } from './pages/mercados/puesto-mercado/puesto-mercado.component';
+import { GenerarCobroComponent } from './pages/mercados/generar-cobro/generar-cobro.component';
 
 
 
@@ -41,7 +42,8 @@ import { PuestoMercadoComponent } from './pages/mercados/puesto-mercado/puesto-m
     ModalTitularComponent,
     ModalSectorComponent,
     ModalPuestoComponent,
-    PuestoMercadoComponent
+    PuestoMercadoComponent,
+    GenerarCobroComponent
   ],
   imports: [
     CommonModule,

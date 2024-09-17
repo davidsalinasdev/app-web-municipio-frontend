@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 // Servicios
@@ -17,6 +17,8 @@ import { Subscription } from 'rxjs';
 import { PuestoMercado } from '../../../../models/puesto-mercado';
 import { IndexSectorSignalService } from '../../../../services/mercados/index-sector-signal.service';
 import { IndexTitularSignalService } from '../../../../services/mercados/index-titular-signal.service';
+import { SectorService } from '../../../../services/mercados/sector.service';
+import { TitularService } from '../../../../services/mercados/titular.service';
 
 // jquery en angular
 declare var $: any;
@@ -51,41 +53,6 @@ export class ModalPuestoComponent implements OnInit {
   public indexSector: any = [];
   public indexTitular: any = [];
 
-  ngOnInit(): void {
-
-    this.subscription = this.mercadoUpdateSignalPuestoServices.dataUpdate$.subscribe((data: PuestoMercado) => {
-
-      this.idPuesto = data.id!;
-
-      this.formularioUpdate.setValue({
-
-        nroPuestoUpdate: data.nro_puesto,
-        sectorUpdate: data.sector_id,
-        titularUpdate: data.titular_id,
-        precioMensualUpdate: data.precio_mensual,
-        fechaIngresoUpdate: data.fecha_ingreso,
-        nroContratoUpdate: data.nro_contrato,
-        observacionesUpdate: data.observaciones,
-        estadoUpdate: Number(data.estado)
-
-      });
-    });
-
-    this.datePickerMaterial();
-    this.crearFormularioUpdate();
-
-    this.initializeSelect2();
-  }
-
-  // Inicializar Select2
-  initializeSelect2() {
-
-    $('#mercado-sector-select2').select2();
-
-    $('#mercado-titular-select2').select2();
-
-  }
-
 
   // Servicios con inyecion de depencencias
   constructor(
@@ -94,7 +61,9 @@ export class ModalPuestoComponent implements OnInit {
     private mercadoSignalPuestoServices: MercadoSignalPuestoService,
     private mercadoUpdateSignalPuestoServices: MercadoUpdateSignalPuestoService,
     private indexSectorSignalServices: IndexSectorSignalService,
-    private indexTitularSignalServices: IndexTitularSignalService
+    private indexTitularSignalServices: IndexTitularSignalService,
+    private sectorServices: SectorService,
+    private titularServices: TitularService
   ) {
     this.crearFormulario();
     // Configura las opciones predeterminadas de Toastr
@@ -104,8 +73,125 @@ export class ModalPuestoComponent implements OnInit {
 
     this.recibirIndexSectorSignal();
     this.recibirIndexTitularSignal();
+    this.selectUpdated();
+
+    this.indexSectorTitular();
+
   }
 
+  ngOnInit(): void {
+
+    this.subscription = this.mercadoUpdateSignalPuestoServices.dataUpdate$.subscribe((data: PuestoMercado) => {
+
+
+      this.idPuesto = data.id!;
+
+      this.formularioUpdate.setValue({
+
+        nro_puestoUpdate: data.nro_puesto,
+        sector_id_update: data.sector_id,
+        titular_id_update: data.titular_id,
+        precio_mensualUpdate: data.precio_mensual,
+        fecha_ingresoUpdate: data.fecha_ingreso,
+        nro_contratoUpdate: data.nro_contrato,
+        observacionesUpdate: data.observaciones,
+        estadoUpdate: Number(data.estado)
+      });
+      $('#mercado-sector-update-select2').val(this.formularioUpdate.value.sector_id_update).trigger('change');
+      $('#mercado-titular-update-select2').val(this.formularioUpdate.value.titular_id_update).trigger('change')
+    });
+
+    this.datePickerMaterial();
+    this.crearFormularioUpdate();
+
+  }
+
+  ngAfterViewInit(): void {
+    $('#mercado-sector-select2').select2({
+      dropdownParent: $('#modal-agregar-puesto'),
+      minimumResultsForSearch: 0
+    }).on('change', (e: any) => {
+      this.formulario.patchValue({
+        sector_id: $(e.target).val()
+      });
+    });
+
+    $('#mercado-titular-select2').select2({
+      dropdownParent: $('#modal-agregar-puesto'),
+      minimumResultsForSearch: 0
+    }).on('change', (e: any) => {
+      this.formulario.patchValue({
+        titular_id: $(e.target).val()
+      });
+    });
+
+    // UPDATE SELECT
+    $('#mercado-sector-update-select2').select2({
+      dropdownParent: $('#modal-editar-puesto'),
+      minimumResultsForSearch: 0
+    }).on('change', (e: any) => {
+      this.formularioUpdate.patchValue({
+        sector_id_update: $(e.target).val()
+      });
+    });
+
+    $('#mercado-titular-update-select2').select2({
+      dropdownParent: $('#modal-editar-puesto'),
+      minimumResultsForSearch: 0
+    }).on('change', (e: any) => {
+      this.formularioUpdate.patchValue({
+        titular_id_update: $(e.target).val()
+      });
+    });
+
+  }
+
+
+  private indexSectorTitular() {
+    this.sectorServices.index().subscribe({
+
+      next: (resp: any) => {
+
+        const { sector } = resp;
+
+        this.indexSector = sector;
+
+      },
+      error: (err) => {
+        console.log('error');
+      },
+
+      complete: () => {
+        // console.log('complete1');
+      }
+    })
+
+    // TITULAR
+    this.titularServices.index().subscribe({
+      next: (resp: any) => {
+
+        const { titular } = resp;
+        this.indexTitular = titular;
+
+      },
+      error: (err) => {
+        console.log('error');
+      },
+      complete: () => {
+        // console.log('complete2');
+      }
+    })
+  }
+
+  /**
+   * selectUpdated
+   */
+  public selectUpdated() {
+    $('#mercado-titular-select2').val(this.formulario.value.titular_id).trigger('change');
+    $('#mercado-sector-select2').val(this.formulario.value.sector_id).trigger('change');
+
+
+  }
 
 
   /**
@@ -114,7 +200,6 @@ export class ModalPuestoComponent implements OnInit {
   public recibirIndexSectorSignal() {
     this.subscriptionSector = this.indexSectorSignalServices.data$.subscribe((data: SectorMercado) => {
       this.indexSector = data;
-      this.updateSelect2();
     })
   }
 
@@ -124,14 +209,9 @@ export class ModalPuestoComponent implements OnInit {
   public recibirIndexTitularSignal() {
     this.subscriptionTitular = this.indexTitularSignalServices.data$.subscribe((data: TitularPuesto) => {
       this.indexTitular = data;
-      this.updateSelect2();
     })
   }
 
-  public updateSelect2() {
-    $('#mercado-sector-select2').val(this.formulario.value.sector_id).trigger('change');
-    $('#mercado-titular-select2').val(this.formulario.value.titular_id).trigger('change');
-  }
 
 
 
@@ -141,10 +221,11 @@ export class ModalPuestoComponent implements OnInit {
       nro_puesto: ['', Validators.required],
       sector_id: ['', Validators.required],
       titular_id: ['', Validators.required],
-      precio_mensual: ['', Validators.required],
+      precio_mensual: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]], // Permite hasta 2 decimales
       fecha_ingreso: ['', Validators.required],
+      fecha_registro: ['', Validators.required],
       nro_contrato: ['', Validators.required],
-      observaciones: ['', Validators.required],
+      observaciones: [''],
     })
   }
 
@@ -173,6 +254,10 @@ export class ModalPuestoComponent implements OnInit {
     return this.formulario.get('nro_contrato');
   }
 
+  get fechaRegistro() {
+    return this.formulario.get('fecha_registro');
+  }
+
   get observaciones() {
     return this.formulario.get('observaciones');
   }
@@ -181,9 +266,9 @@ export class ModalPuestoComponent implements OnInit {
 
     this.formularioUpdate = this.fb.group({
       nro_puestoUpdate: ['', Validators.required],
-      sectorUpdate: ['', Validators.required],
-      titularUpdate: ['', Validators.required],
-      precio_mensualUpdate: ['', Validators.required],
+      sector_id_update: ['', Validators.required],
+      titular_id_update: ['', Validators.required],
+      precio_mensualUpdate: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]], // Permite hasta 2 decimales
       fecha_ingresoUpdate: ['', Validators.required],
       nro_contratoUpdate: ['', Validators.required],
       observacionesUpdate: ['', Validators.required],
@@ -195,12 +280,12 @@ export class ModalPuestoComponent implements OnInit {
   get nroPuestoUpdate() {
     return this.formularioUpdate.get('nro_puestoUpdate');
   }
-  get sectorUpdate() {
-    return this.formularioUpdate.get('sectorUpdate');
+  get sectorPuestoUpdate() {
+    return this.formularioUpdate.get('sector_id_update');
   }
 
-  get titularUpdate() {
-    return this.formularioUpdate.get('titularUpdate');
+  get titularPuestoUpdate() {
+    return this.formularioUpdate.get('titular_id_update');
   }
 
   get precioMensualUpdate() {
@@ -223,27 +308,26 @@ export class ModalPuestoComponent implements OnInit {
     return this.formularioUpdate.get('estadoUpdate');
   }
 
-
   /**
    * submit
    */
   public submit(formDirective: FormGroupDirective) {
 
+    // console.log(this.formulario.value);
+    // return;
     const usuarioAuth = JSON.parse(localStorage.getItem('usuario')!);
 
     const formData: PuestoMercado = {
       nro_puesto: this.formulario.value.nro_puesto,
-      sector_id: this.formulario.value.sector,
-      titular_id: this.formulario.value.titular,
+      sector_id: this.formulario.value.sector_id,
+      titular_id: this.formulario.value.titular_id,
       usuario_id: usuarioAuth.id,
       precio_mensual: this.formulario.value.precio_mensual,
       fecha_ingreso: this.formulario.value.fecha_ingreso,
+      fecha_registro: this.formulario.value.fecha_registro,
       nro_contrato: this.formulario.value.nro_contrato,
       observaciones: this.formulario.value.observaciones,
     }
-
-    // console.log(formData);
-
 
     this.puestoServices.store(formData).subscribe({
       next: (resp: any) => {
@@ -254,12 +338,20 @@ export class ModalPuestoComponent implements OnInit {
         if (status === 'success') {
 
           // Después de una agregación exitosa
-          $('#myTablePuesto').DataTable().ajax.reload(null, false);
+          $('#myTablePuesto').DataTable().ajax.reload(function () {
+            // Aquí puedes forzar el orden si es necesario
+            $('#myTablePuesto').DataTable().order([1, 'desc']).draw();
+          }, false);
+
+
           // Emisión de de datos
           this.mercadoSignalPuestoServices.sendData(sector);
 
           // Resetear formulario
           formDirective.resetForm();
+          // this.formulario.reset();  // Añade esta línea si no está ya
+          $('#mercado-sector-select2').val(null).trigger('change');
+          $('#mercado-titular-select2').val(null).trigger('change');
 
           // Display a success toast, with a title
           // Configura opciones adicionales y muestra la notificación
@@ -289,23 +381,24 @@ export class ModalPuestoComponent implements OnInit {
     const formData: PuestoMercado = {
 
       id: this.idPuesto, // Se agrega el id Puesto
-      nro_puesto: this.formularioUpdate.value.nroPuestoUpdate,
-      sector_id: this.formularioUpdate.value.sectorUpdate,
-      titular_id: this.formularioUpdate.value.titularUpdate,
+      nro_puesto: this.formularioUpdate.value.nro_puestoUpdate,
+      sector_id: this.formularioUpdate.value.sector_id_update,
+      titular_id: this.formularioUpdate.value.titular_id_update,
       usuario_id: usuarioAuth.id,
-      precio_mensual: this.formularioUpdate.value.precioMensualUpdate,
-      nro_contrato: this.formularioUpdate.value.nroContratoUpdate,
-      fecha_ingreso: this.formularioUpdate.value.fechaIngresoUpdate,
+      precio_mensual: this.formularioUpdate.value.precio_mensualUpdate,
+      nro_contrato: this.formularioUpdate.value.nro_contratoUpdate,
+      fecha_ingreso: this.formularioUpdate.value.fecha_ingresoUpdate,
       observaciones: this.formularioUpdate.value.observacionesUpdate,
       estado: this.formularioUpdate.value.estadoUpdate
-
     }
-
 
     this.puestoServices.update(formData, this.idPuesto).subscribe({
       next: (resp: any) => {
 
-        const { status, sector, message } = resp;
+        const { status, puesto } = resp;
+
+        // console.log(puesto);
+
 
         if (status === 'success') {
           toastr.success(`Se actualizo correctamente`, 'Web GAMDC')
@@ -313,7 +406,7 @@ export class ModalPuestoComponent implements OnInit {
           // Emisión de de datos
           // Después de una eliminación exitosa
           $('#myTablePuesto').DataTable().ajax.reload(null, false);
-          this.mercadoUpdateSignalPuestoServices.sendDataUpdate(sector);
+          this.mercadoUpdateSignalPuestoServices.sendDataUpdate(puesto);
           formDirectiveUpdate.resetForm();
         }
       },
@@ -322,7 +415,7 @@ export class ModalPuestoComponent implements OnInit {
         console.log('error');
       },
       complete: () => {
-        console.log('complete');
+        // console.log('complete');
       }
     });
   }
@@ -350,14 +443,28 @@ export class ModalPuestoComponent implements OnInit {
    */
   public datePickerMaterial() {
     // Configura el datepicker para que esté en español
-    $('.mydatepicker, #datepicker').datepicker({
+    $('#fecha_ingreso').datepicker({
       language: 'es',
       autoclose: true
     }).on('changeDate', (e: any) => {
       this.formulario.patchValue({
-        fecha_ingreso: e.format(0, "dd/mm/yyyy")
+        fecha_ingreso: e.format(0, "dd/mm/yyyy"),
       });
     });
+
+    // Configura el datepicker para que esté en español
+    // Datepicker para 'fecha_registro_puesto' con mes y año
+    $('#fecha-registro-puesto').datepicker({
+      language: 'es',
+      autoclose: true,
+      format: 'mm/yyyy',
+      minViewMode: 1
+    }).on('changeDate', (e: any) => {
+      this.formulario.patchValue({
+        fecha_registro: e.format(0, "mm/yyyy"),
+      });
+    });
+
   }
 
 }

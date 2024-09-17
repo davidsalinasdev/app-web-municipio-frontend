@@ -49,6 +49,7 @@ export class SidebarService {
         { titulo: 'Titular', url: '/admin/dashboard/titular-puesto-mercado' },
         { titulo: 'Sector', url: '/admin/dashboard/sector-mercado' },
         { titulo: 'Puestos', url: '/admin/dashboard/puesto-mercado' },
+        { titulo: 'Generar cobro', url: '/admin/dashboard/generar-cobro' },
         // { titulo: 'ProgressBar', url: 'progress' },
         // { titulo: 'Gráficas', url: 'grafica1' },
       ]

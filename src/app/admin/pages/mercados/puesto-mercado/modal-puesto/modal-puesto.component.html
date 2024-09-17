@@ -19,7 +19,7 @@
                     <div class="col-12 col-lg-4 form-group">
                         <label for="nro_puesto-puesto">N° Puesto<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control" id="nro_puesto-puesto"
-                            placeholder="Ingrese el N° de puesto" formControlName="nro_puesto">
+                            placeholder="Ingrese el N° de puesto" formControlName="nro_puesto" autocomplete="off">
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div *ngIf="this.nroPuesto?.invalid && (this.nroPuesto?.dirty || this.nroPuesto?.touched)">
@@ -73,7 +73,7 @@
                     <div class="col-12 col-lg-4  form-group">
                         <label for="precio-mensual-puesto">Precio mensual<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control" id="precio-mensual-puesto"
-                            placeholder="Ingrese el precio mensual" formControlName="precio_mensual">
+                            placeholder="Ingrese el precio mensual" formControlName="precio_mensual" autocomplete="off">
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
@@ -83,6 +83,10 @@
                                 class="animated fadeIn fast text-danger font-14" id="">
                                 Este campo es requerido.
                             </div>
+                            <div *ngIf="this.precioMensual?.hasError('pattern')"
+                                class="animated fadeIn fast text-danger font-14">
+                                Ingrese un precio válido con hasta 2 decimales.
+                            </div>
                         </div>
                     </div>
 
@@ -91,7 +95,7 @@
                         <label for="fecha_ingreso">Fecha de Ingreso<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy"
-                                id="fecha_ingreso" formControlName="fecha_ingreso">
+                                id="fecha_ingreso" formControlName="fecha_ingreso" autocomplete="off">
                             <span class="input-group-addon"><i class="icon-calender"></i></span>
                         </div>
                         <!-- Validacion -->
@@ -111,7 +115,7 @@
                     <div class="col-12 col-lg-4  form-group">
                         <label for="nro_contrato-puesto">N° de Contrato<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control" id="nro_contrato-puesto"
-                            placeholder="Ingrese el N° de Contrato" formControlName="nro_contrato">
+                            placeholder="Ingrese el N° de Contrato" formControlName="nro_contrato" autocomplete="off">
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
@@ -124,23 +128,32 @@
                         </div>
                     </div>
 
-                    <!-- Observaciones -->
-                    <div class="col-12  form-group">
-                        <label for="observaciones-puesto">Observaciones<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control" id="observaciones-puesto"
-                            placeholder="Ingrese observaciones" formControlName="observaciones">
+                    <!-- Fecha de registro en sistema -->
+                    <div class="col-12 col-lg-4  form-group">
+                        <label for="fecha-registro-puesto">Mes Inicio Cobro<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control mydatepicker" placeholder="mm/yyyy"
+                                id="fecha-registro-puesto" formControlName="fecha_registro" autocomplete="off">
+                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                        </div>
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
-                            *ngIf="this.observaciones?.invalid && (this.observaciones?.dirty || this.observaciones?.touched)">
+                            *ngIf="this.fechaRegistro?.invalid && (this.fechaRegistro?.dirty || this.fechaRegistro?.touched)">
                             <!-- Errores con expresiones regulares -->
-                            <div *ngIf="this.observaciones?.hasError('required')"
+                            <div *ngIf="this.fechaRegistro?.hasError('required')"
                                 class="animated fadeIn fast text-danger font-14" id="">
                                 Este campo es requerido.
                             </div>
                         </div>
                     </div>
 
+                    <!-- Observaciones -->
+                    <div class="col-12 col-lg-8 form-group">
+                        <label for="observaciones-puesto">Observaciones</label>
+                        <input type="text" class="form-control form-control" id="observaciones-puesto"
+                            placeholder="Ingrese observaciones" formControlName="observaciones" autocomplete="off">
+                    </div>
                 </div>
 
 
@@ -162,7 +175,7 @@
 <!-- Modal formulario para EDITAR sector -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     style="display: none;" aria-hidden="true" id="modal-editar-puesto">
-    <div class="modal-dialog modal-heading">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content modal-content--borde">
 
             <form #formDirectiveUpdate="ngForm" [formGroup]="this.formularioUpdate"
@@ -176,13 +189,13 @@
                         aria-hidden="true">x</button>
                 </div>
 
-                <div class="modal-body modal-body--form">
+                <div class="modal-body modal-body--form row">
 
                     <!-- Número de puesto -->
-                    <div class="form-group">
+                    <div class="col-12 col-lg-4 form-group">
                         <label for="nro_puestoUpdate-puesto">N° Puesto<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control" id="nro_puestoUpdate-puesto"
-                            placeholder="Ingrese el N° de puesto" formControlName="nro_puestoUpdate">
+                            placeholder="Ingrese el N° de puesto" formControlName="nro_puestoUpdate" autocomplete="off">
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
@@ -196,62 +209,54 @@
                     </div>
 
                     <!-- Sector -->
-                    <div class="form-group">
-                        <label for="mercado-sector-puestoUpdate-select2">Sector<span
-                                class="text-danger">*</span></label>
-
-                        <!-- <h5 class="m-t-30">Single select2</h5> -->
-                        <select class="select2 form-control custom-select" id="mercado-sector-puestoUpdate-select2"
-                            formControlName="sectorUpdate" style="width: 100%; height:36px;">
-                            <option value="" disabled selected>-Selecionar-</option>
-                            <option value="interno">Panaderia</option>
-                            <option value="externo">Av. Santa Cruz</option>
+                    <div class="col-12 col-lg-4 form-group">
+                        <label for="mercado-sector-update-select2">Sector<span class="text-danger">*</span></label>
+                        <select class="select2 form-control custom-select" id="mercado-sector-update-select2"
+                            formControlName="sector_id_update" style="width: 100%; height:36px;">
+                            <option value="" disabled selected>-Seleccionar-</option>
+                            @for (item of this.indexSector; track item.id) {
+                            <option value="{{ item.id }}">{{ item.sector }} - Mercado: {{ item.mercado }}</option>
+                            } @empty {
+                            <option value="">No existen titulares registrados</option>
+                            }
                         </select>
-
-                        <!-- Validacion -->
-                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
-                            *ngIf="this.sectorUpdate?.invalid && (this.sectorUpdate?.dirty || this.sectorUpdate?.touched)">
-                            <!-- Errores con expresiones regulares -->
-                            <div *ngIf="this.sectorUpdate?.hasError('required')"
-                                class="animated fadeIn fast text-danger font-14" id="">
+                            *ngIf="sectorPuestoUpdate?.invalid && (sectorPuestoUpdate?.dirty || sectorPuestoUpdate?.touched)">
+                            <div *ngIf="sectorPuestoUpdate?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14">
                                 Este campo es requerido.
                             </div>
                         </div>
-
                     </div>
 
                     <!-- Titular -->
-                    <div class="form-group">
-                        <label for="mercado-titularUpdate-select2">Titular<span class="text-danger">*</span></label>
-
-                        <!-- <h5 class="m-t-30">Single select2</h5> -->
-                        <select class="select2 form-control custom-select" id="mercado-titularUpdate-select2"
-                            formControlName="titularUpdate" style="width: 100%; height:36px;">
-                            <option value="" disabled selected>-Selecionar-</option>
-                            <option value="interno">David Salinas</option>
-                            <option value="externo">Faviana Villca</option>
+                    <div class="col-12 col-lg-4 form-group">
+                        <label for="mercado-titular-update-select2">Titular<span class="text-danger">*</span></label>
+                        <select class="select2 form-control custom-select" id="mercado-titular-update-select2"
+                            formControlName="titular_id_update" style="width: 100%; height:36px;">
+                            <option value="" disabled selected>-Seleccionar-</option>
+                            @for (item of this.indexTitular; track item.id) {
+                            <option value="{{ item.id }}">{{ item.nombres }} {{ item.apellidos }}</option>
+                            } @empty {
+                            <option value="">No existen titulares registrados</option>
+                            }
                         </select>
-
-                        <!-- Validacion -->
-                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
-                            *ngIf="this.titularUpdate?.invalid && (this.titularUpdate?.dirty || this.titularUpdate?.touched)">
-                            <!-- Errores con expresiones regulares -->
-                            <div *ngIf="this.titularUpdate?.hasError('required')"
-                                class="animated fadeIn fast text-danger font-14" id="">
+                            *ngIf="titularPuestoUpdate?.invalid && (titularPuestoUpdate?.dirty || titularPuestoUpdate?.touched)">
+                            <div *ngIf="titularPuestoUpdate?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14">
                                 Este campo es requerido.
                             </div>
                         </div>
-
                     </div>
 
                     <!-- Precio mensual -->
-                    <div class="form-group">
+                    <div class="col-12 col-lg-4 form-group">
                         <label for="precio-mensualUpdate-puesto">Precio mensual<span
                                 class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control" id="precio-mensualUpdate-puesto"
-                            placeholder="Ingrese el precio mensual" formControlName="precio_mensualUpdate">
+                            placeholder="Ingrese el precio mensual" formControlName="precio_mensualUpdate"
+                            autocomplete="off">
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
@@ -265,19 +270,19 @@
                     </div>
 
                     <!-- Fecha de Ingreso -->
-                    <div class="form-group">
+                    <div class="col-12 col-lg-4  form-group">
+                        <label for="fecha_ingresoUpdate">Fecha de Ingreso<span class="text-danger">*</span></label>
                         <div class="input-group">
-                            <label for="fecha_ingresoUpdate"></label>
                             <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy"
-                                id="fecha_ingresoUpdate" formControlName="fecha_ingresoUpdate">
+                                id="fecha_ingresoUpdate" formControlName="fecha_ingresoUpdate" autocomplete="off">
                             <span class="input-group-addon"><i class="icon-calender"></i></span>
                         </div>
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
-                            *ngIf="this.fechaIngresoUpdate?.invalid && (this.fechaIngresoUpdate?.dirty || this.fechaIngresoUpdate?.touched)">
+                            *ngIf="this.fechaIngreso?.invalid && (this.fechaIngreso?.dirty || this.fechaIngreso?.touched)">
                             <!-- Errores con expresiones regulares -->
-                            <div *ngIf="this.fechaIngresoUpdate?.hasError('required')"
+                            <div *ngIf="this.fechaIngreso?.hasError('required')"
                                 class="animated fadeIn fast text-danger font-14" id="">
                                 Este campo es requerido.
                             </div>
@@ -286,10 +291,11 @@
                     </div>
 
                     <!-- Número de contrato -->
-                    <div class="form-group">
+                    <div class="col-12 col-lg-4 form-group">
                         <label for="nro_contratoUpdate-puesto">N° de Contrato<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control" id="nro_contratoUpdate-puesto"
-                            placeholder="Ingrese el N° de Contrato" formControlName="nro_contratoUpdate">
+                            placeholder="Ingrese el N° de Contrato" formControlName="nro_contratoUpdate"
+                            autocomplete="off">
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
@@ -303,10 +309,11 @@
                     </div>
 
                     <!-- Observaciones -->
-                    <div class="form-group">
+                    <div class="col-12 col-lg-8 form-group">
                         <label for="observacionesUpdate-puesto">Observaciones<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control" id="observacionesUpdate-puesto"
-                            placeholder="Ingrese observaciones" formControlName="observacionesUpdate">
+                            placeholder="Ingrese observaciones" formControlName="observacionesUpdate"
+                            autocomplete="off">
                         <!-- Validacion -->
                         <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
                         <div
@@ -320,9 +327,10 @@
                     </div>
 
                     <!-- Estado -->
-                    <div class="form-group">
+                    <div class="col-12 col-lg-4 form-group">
                         <label for="estadoPuesto">Estado</label>
-                        <select class="form-control" id="estadoPuesto" formControlName="estadoUpdate">
+                        <select class="form-control" id="estadoPuesto" formControlName="estadoUpdate"
+                            autocomplete="off">
                             <option *ngFor="let item of this.estados" [value]="item.value">{{ item.estado }}</option>
                         </select>
                     </div>

@@ -189,7 +189,7 @@ export class PuestoMercadoComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * btnModalAgregar
+   * btnModalAgregar y carga de datos al select2
    */
   public async btnModalAgregar() {
 
@@ -198,6 +198,11 @@ export class PuestoMercadoComponent implements OnInit, OnDestroy {
     await this.mostrarModal(); // Espera a que se muestre el modal
     // Aquí puedes realizar otras acciones después de que se muestre el modal
 
+    this.cargaSectorTitular();
+
+  }
+
+  private cargaSectorTitular() {
     //  Carga y envio de datos al modal mediante el observable
     // SECTOR
     this.sectorServices.index().subscribe({
@@ -251,18 +256,20 @@ export class PuestoMercadoComponent implements OnInit, OnDestroy {
     $('.modal-backdrop').remove(); // Eliminar cualquier instancia de modal-backdrop
   }
 
+  public async showPuesto(id: number) {
 
-  public showPuesto(id: number) {
+    $('.modal-backdrop').remove(); // Eliminar cualquier instancia de modal-backdrop
+    await this.mostrarModalEditar();
 
-    $('#modal-editar-puesto').modal('show');
-
+    // Carga de datos PUESTO DE MERCADO   
     this.puestoServices.show(id).subscribe({
       next: (resp: any) => {
 
-        const { sector } = resp;
+        const { puesto } = resp;
 
         // Emisión de de datos
-        this.mercadoUpdateSignalPuestoServices.sendDataUpdate(sector);
+        this.mercadoUpdateSignalPuestoServices.sendDataUpdate(puesto);
+
 
       },
       error: (err) => {
@@ -273,6 +280,14 @@ export class PuestoMercadoComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+  private mostrarModalEditar(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      $('#modal-editar-puesto').modal('show');
+      resolve(); // Resuelve la promesa cuando se muestra el modal
+    });
+  }
+
 
   /**
    * mostrarPuesto
@@ -292,8 +307,8 @@ export class PuestoMercadoComponent implements OnInit, OnDestroy {
         if (status === 'success') {
           toastr.success(`${message}`, 'Web GAMDC');
 
-          // Después de una eliminación exitosa
-          $('#myTableSector').DataTable().ajax.reload(null, false);
+          // Después de una eliminación exitosa reload
+          $('#myTablePuesto').DataTable().ajax.reload(null, false);
         } else {
           toastr.error(`Intente nuevamente`, 'Web GAMDC');
         }
