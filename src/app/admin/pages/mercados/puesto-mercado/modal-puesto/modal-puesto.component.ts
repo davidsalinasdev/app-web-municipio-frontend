@@ -223,7 +223,6 @@ export class ModalPuestoComponent implements OnInit {
       titular_id: ['', Validators.required],
       precio_mensual: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]], // Permite hasta 2 decimales
       fecha_ingreso: ['', Validators.required],
-      fecha_registro: ['', Validators.required],
       nro_contrato: ['', Validators.required],
       observaciones: [''],
     })
@@ -252,10 +251,6 @@ export class ModalPuestoComponent implements OnInit {
 
   get nroContrato() {
     return this.formulario.get('nro_contrato');
-  }
-
-  get fechaRegistro() {
-    return this.formulario.get('fecha_registro');
   }
 
   get observaciones() {
@@ -299,7 +294,6 @@ export class ModalPuestoComponent implements OnInit {
   get nroContratoUpdate() {
     return this.formularioUpdate.get('nro_contratoUpdate');
   }
-
 
   get observacionesUpdate() {
     return this.formularioUpdate.get('observacionesUpdate');

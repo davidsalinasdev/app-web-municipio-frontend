@@ -128,28 +128,8 @@
                         </div>
                     </div>
 
-                    <!-- Fecha de registro en sistema -->
-                    <div class="col-12 col-lg-4  form-group">
-                        <label for="fecha-registro-puesto">Mes Inicio Cobro<span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <input type="text" class="form-control mydatepicker" placeholder="mm/yyyy"
-                                id="fecha-registro-puesto" formControlName="fecha_registro" autocomplete="off">
-                            <span class="input-group-addon"><i class="icon-calender"></i></span>
-                        </div>
-                        <!-- Validacion -->
-                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
-                        <div
-                            *ngIf="this.fechaRegistro?.invalid && (this.fechaRegistro?.dirty || this.fechaRegistro?.touched)">
-                            <!-- Errores con expresiones regulares -->
-                            <div *ngIf="this.fechaRegistro?.hasError('required')"
-                                class="animated fadeIn fast text-danger font-14" id="">
-                                Este campo es requerido.
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Observaciones -->
-                    <div class="col-12 col-lg-8 form-group">
+                    <div class="col-12 form-group">
                         <label for="observaciones-puesto">Observaciones</label>
                         <input type="text" class="form-control form-control" id="observaciones-puesto"
                             placeholder="Ingrese observaciones" formControlName="observaciones" autocomplete="off">
