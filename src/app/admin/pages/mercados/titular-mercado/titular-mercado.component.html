@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-between animated fadeIn fast">
 
   <div class="titulo-principal">
-  <h4 class="card-title">Administración de titulares de puestos de mercado</h4>
+    <h4 class="card-title">Administración de titulares de puestos de mercado</h4>
     <h6 class="card-subtitle">Lista de datos de la tabla Titulares</h6>
   </div>
 
@@ -13,19 +13,21 @@
 
 </div>
 
-<table datatable [dtOptions]="this.dtOptions" class="row-border hover" id="myTableTitulars">
-  <thead>
-    <tr>
-       <th>#</th>
-      <th>Identificador</th>
-      <th>Nombres</th>
-      <th>Apellidos</th>
-      <th>Carnet</th>
-      <th>Estado</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-<!-- Aqui la logica de la tabla de datos -->
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table datatable [dtOptions]="this.dtOptions" class="row-border hover" id="myTableTitulars">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Identificador</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Carnet</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aqui la logica de la tabla de datos -->
+    </tbody>
+  </table>
+</div>

@@ -10,8 +10,7 @@ import { SectorMercadoComponent } from './pages/mercados/sector-mercado/sector-m
 import { GestionMercadoComponent } from './pages/mercados/gestion-mercado/gestion-mercado.component';
 import { PuestoMercadoComponent } from './pages/mercados/puesto-mercado/puesto-mercado.component';
 import { GenerarCobroComponent } from './pages/mercados/generar-cobro/generar-cobro.component';
-
-
+import { CobrarComponent } from './pages/mercados/cobrar/cobrar.component';
 
 // Rutas hijas de Admin Module
 const childRoutes: Routes = [
@@ -31,7 +30,7 @@ const childRoutes: Routes = [
     { path: 'gestion-mercado', component: GestionMercadoComponent, data: { titulo: 'Gestión Mercados' } },
     { path: 'puesto-mercado', component: PuestoMercadoComponent, data: { titulo: 'Gestión Puesto de Mercado' } },
     { path: 'generar-cobro', component: GenerarCobroComponent, data: { titulo: 'Generar cobro de Mercado' } },
-
+    { path: 'cobrar', component: CobrarComponent, data: { titulo: 'Cobrar Puestos de Mercado' } },
 
 ];
 

@@ -14,7 +14,7 @@ export class GenerarCobroService {
   /**
   * store
   */
-  public store() {
+  public storeCobro() {
 
     const user = localStorage.getItem('usuario');
 

@@ -1,7 +1,15 @@
 <div class="row justify-content-center">
-    <div class="form-group border p-4 rounded">
+    <div class="form-group border p-3 rounded" style="width: 500px;">
         <label for="generar" class="text-uppercase mb-2">Generar cobro</label><br>
-        <button type="button" id="generar" class="btn btn-info text-uppercase" (click)="this.generarCobro()">Generar
-            cobro</button>
+
+        <div class="input-group">
+
+            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" [(ngModel)]="this.fechaActual"
+                disabled="true">
+            <span class="input-group-addon"><i class="icon-calender"></i></span>
+
+        </div>
+        <button type="button" id="generar" class="btn btn-info text-uppercase mt-3"
+            (click)="this.generarCobro()">Generar Cobro</button>
     </div>
 </div>

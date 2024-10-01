@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -12,7 +13,6 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PersonaComponent } from './pages/persona/persona.component';
 import { ModalPersonaComponent } from './pages/persona/modal-persona/modal-persona.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ModalUsuariosComponent } from './pages/usuarios/modal-usuarios/modal-usuarios.component';
 import { UltimasNoticiasComponent } from './pages/ultimas-noticias/ultimas-noticias.component';
@@ -24,6 +24,7 @@ import { ModalSectorComponent } from './pages/mercados/sector-mercado/modal-sect
 import { ModalPuestoComponent } from './pages/mercados/puesto-mercado/modal-puesto/modal-puesto.component';
 import { PuestoMercadoComponent } from './pages/mercados/puesto-mercado/puesto-mercado.component';
 import { GenerarCobroComponent } from './pages/mercados/generar-cobro/generar-cobro.component';
+import { CobrarComponent } from './pages/mercados/cobrar/cobrar.component';
 
 
 
@@ -43,14 +44,16 @@ import { GenerarCobroComponent } from './pages/mercados/generar-cobro/generar-co
     ModalSectorComponent,
     ModalPuestoComponent,
     PuestoMercadoComponent,
-    GenerarCobroComponent
+    GenerarCobroComponent,
+    CobrarComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule
   ]
 })
 export class AdminModule { }
