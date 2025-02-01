@@ -1,56 +1,71 @@
 <div class="container-fluid noticias-container">
-  <div class="container" style="max-width: 1600px;">
-    <div class="row">
 
-      <div class="col-12 mb-4">
-        <h2 class="text-uppercase h2-web" style="margin-bottom: 0px;">Noticias y Anuncios</h2>
-        <P class="circulos text-center">
-          <i class="far fa-circle circulos__icons"></i>
-          <i class="far fa-circle circulos__icons"></i>
-          <i class="far fa-circle circulos__icons"></i>
-        </P>
-      </div>
+  <div class="container" style="max-width: 1800px;">
+    <div class="col-12 mb-4">
+      <div class="row border p-5 bg-celeste">
 
-      <!-- Aquí las noticias -->
-      <div class="col-12 mt-2">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card card-noticia">
-              <img src="../../../../assets/img/7.jpg" class="card-img-top" alt="Noticia 1">
-              <div class="card-body">
-                <h5 class="card-title">Título de la Noticia 1</h5>
-                <p class="p-text">Descripción breve de la noticia. Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit.</p>
-                <a href="#" class="btn btn-lg btn-rounded btn-info">Leer más</a>
-              </div>
+        <div class="col-12 mb-4">
+          <h2 class="text-uppercase h2-web text-white" style="margin-bottom: 0px;">Noticias</h2>
+          <P class="circulos text-center">
+            <i class="fa fa-circle-o circulos__icons"></i>
+            <i class="fa fa-circle-o circulos__icons"></i>
+            <i class="fa fa-circle-o circulos__icons"></i>
+          </P>
+        </div>
+
+        <!-- Aquí las noticias -->
+        <div class="col-12 mt-2">
+          <div class="row">
+            <div class="col-md-4">
+              <a [routerLink]="[ '/web/detalle-noticias', this.noticia[0]?.titulo , 'individual' ]">
+                <div class="card card-noticia">
+                  <img [src]="this.noticia[0]?.imagen" class="card-img-top" alt="Noticia 1">
+                  <div class="card-body">
+                    <a href="#" class="btn btn-sm mb-3 text-white" style="background-color: #0389e2;">{{
+                      this.noticia[0]?.categorias[0] }}</a>
+                    <p style="font-weight: 500; font-size: 20px; color: rgb(43, 43, 43);">{{ this.noticia[0]?.titulo |
+                      slice:0:75}}...</p>
+                    <p style="font-weight: normal; font-size: 16px;color: #0389e2 !important;">Publicado el: {{
+                      this.noticia[0]?.fecha }} </p>
+                  </div>
+                </div>
+              </a>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-noticia">
-              <img src="../../../../assets/img/alcaldia2023.jpg" class="card-img-top" alt="Noticia 2">
-              <div class="card-body">
-                <h5 class="card-title">Título de la Noticia 2</h5>
-                <p class="p-text">Descripción breve de la noticia. Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit.</p>
-                <a href="#" class="btn btn-lg btn-rounded btn-info">Leer más</a>
-              </div>
+            <div class="col-md-4">
+              <a [routerLink]="[ '/web/detalle-noticias', this.noticia[1]?.titulo , 'individual' ]">
+                <div class="card card-noticia">
+                  <img [src]="this.noticia[1]?.imagen" class="card-img-top" alt="Noticia 2">
+                  <div class="card-body">
+                    <a href="#" class="btn btn-sm mb-3 text-white" style="background-color: #0389e2;">{{
+                      this.noticia[1]?.categorias[0] }}</a>
+                    <p style="font-weight: 500; font-size: 20px; color: rgb(43, 43, 43);">{{ this.noticia[1]?.titulo |
+                      slice:0:75}}</p>
+                    <p style="font-weight: normal; font-size: 16px;color: #0389e2 !important;">Publicado el: {{
+                      this.noticia[1]?.fecha }} </p>
+                  </div>
+                </div>
+              </a>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-noticia">
-              <img src="../../../../assets/img/alcaldia2024.jpg" class="card-img-top" alt="Noticia 3">
-              <div class="card-body">
-                <h5 class="card-title">Título de la Noticia 3</h5>
-                <p class="p-text">Descripción breve de la noticia. Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit.</p>
-                <a href="#" class="btn btn-lg btn-rounded btn-info">Leer más</a>
-              </div>
+            <div class="col-md-4">
+              <a [routerLink]="[ '/web/detalle-noticias', this.noticia[2]?.titulo , 'individual' ]">
+                <div class="card card-noticia">
+                  <img [src]="this.noticia[2]?.imagen" class="card-img-top" alt="Noticia 3">
+                  <div class="card-body">
+                    <a href="#" class="btn btn-sm mb-3 text-white" style="background-color: #0389e2;">{{
+                      this.noticia[2]?.categorias[0] }}</a>
+                    <p style="font-weight: 500; font-size: 20px; color: rgb(43, 43, 43);">{{ this.noticia[2]?.titulo |
+                      slice:0:75}}</p>
+                    <p style="font-weight: normal; font-size: 16px;color: #0389e2 !important;">Publicado el: {{
+                      this.noticia[2]?.fecha }} </p>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Fin de las noticias -->
+        <!-- Fin de las noticias -->
 
+      </div>
     </div>
   </div>
 </div>

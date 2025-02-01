@@ -19,19 +19,24 @@ nav {
 
   /* logica */
   .logoTecSur {
-    width: 15rem;
+    width: 14rem;
   }
 }
 
 .fondo {
 
-  /* background-image: url('../../../../assets/img/bg-menu.png');
+  background-image: url('../../../../assets/img/bg-menu_2.png');
   opacity: 0.4;
-  z-index: 999; */
-  background: rgb(15, 167, 246);
-  background: linear-gradient(90deg, rgba(15, 167, 246, 1) 0%, rgba(9, 45, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
-  padding: 0.2rem;
+  z-index: 66666;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 
+  /* background: rgb(15, 167, 246); */
+  /* background: linear-gradient(90deg, rgb(15, 170, 219) 0%, rgba(9, 167, 246, 1) 35%, rgba(0, 212, 255, 1) 100%); */
+  /* background: linear-gradient(90deg, rgba(15, 204, 255, 1) 0%, rgba(9, 153, 204, 1) 35%, rgba(0, 102, 153, 1) 100%); */
+  padding: 0.2rem;
+  /* background-color: #A0DEFF; */
 }
 
 .fondo-dos {
@@ -122,6 +127,9 @@ div.logo-menu div ul li a:hover {
   z-index: 1000;
 }
 
+
+
+/* Para que el menu acompañe a todo lado */
 .fixed-top2 {
   position: fixed;
   top: 0px;
@@ -129,7 +137,6 @@ div.logo-menu div ul li a:hover {
   left: 0;
   z-index: 1030;
 }
-
 
 @media(min-width: 992px) {
   .dropdown-menu {
@@ -141,4 +148,47 @@ div.logo-menu div ul li a:hover {
 
 .nav-item {
   cursor: pointer;
+}
+
+.acerca {
+  color: white !important;
+  font-weight: 400 !important;
+  font-size: 1.05rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+.acerca--ancor {
+  color: #0389e2 !important;
+  font-weight: 400 !important;
+  font-size: 1.05rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+.acerca--servicio {
+  color: white !important;
+  font-weight: lighter !important;
+  font-size: 1.3rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+.nav-item.dropdown--servicio {
+  position: relative;
+}
+
+.dropdown-menu--servicio {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.dropdown-menu--servicio.showServicio {
+  display: block;
 }

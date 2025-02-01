@@ -14,15 +14,19 @@ export class GenerarCobroService {
   /**
   * store
   */
-  public storeCobro() {
+  public storeCobro(data: any) {
 
     const user = localStorage.getItem('usuario');
 
     const { id } = JSON.parse(user!);
 
     const formData = {
-      id
+      id: id,
+      fecha_actual: data.fecha_actual
     };
+
+    console.log(formData);
+
 
     return this.http.post(`${base_url}/api/generar-cobro`, formData);
   }

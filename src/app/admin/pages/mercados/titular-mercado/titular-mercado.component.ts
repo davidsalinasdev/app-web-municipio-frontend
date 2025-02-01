@@ -111,7 +111,7 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
 
       },
       columns: [
-        { data: null }, // Este será el índice de la fila
+        // { data: null }, // Este será el índice de la fila
         { data: 'id' },
         { data: 'nombres' },
         { data: 'apellidos' },
@@ -142,16 +142,19 @@ export class TitularMercadoComponent implements OnInit, OnDestroy {
         }
       ],
       order: [[1, 'desc']], // Ordenar por la primera columna ('id') de forma descendente
-      columnDefs: [
-        {
-          targets: 0, // Primer columna (donde se enumerarán las filas)
-          orderable: false,
-          searchable: false,
-          render: (data: any, type: any, row: any, meta: any) => {
-            return meta.row + meta.settings._iDisplayStart + 1;
-          }
-        }
-      ],
+
+      // Esto enumera las filas de la tabla
+      // columnDefs: [
+      //   {
+      //     targets: 0, // Primer columna (donde se enumerarán las filas)
+      //     orderable: false,
+      //     searchable: false,
+      //     render: (data: any, type: any, row: any, meta: any) => {
+      //       return meta.row + meta.settings._iDisplayStart + 1;
+      //     }
+      //   }
+      // ],
+
       drawCallback: () => {
         // Remove previous listeners to avoid multiple bindings
         $(document).off('click', '.titular-delete-btn');

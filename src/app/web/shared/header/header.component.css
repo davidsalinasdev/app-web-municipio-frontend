@@ -1,8 +1,10 @@
    /* Rellenando toda la pantalla */
    #carouselExampleIndicators2 {
-     height: 100vh;
+     height: 100%;
      /* 100% of viewport height */
    }
+
+
 
    .carousel-inner {
      height: 100%;
@@ -10,13 +12,13 @@
    }
 
    .carousel-item {
-     height: 100%;
+     max-height: auto;
      /* 100% of parent height */
    }
 
    .img-carrusel {
      width: 100%;
-     height: 100%;
+     max-height: auto;
      object-fit: cover;
    }
 
@@ -38,60 +40,6 @@
    /* Posicionamiento del mensaje en las imagenes de carrusel */
    .carousel {
      position: relative;
-   }
-
-   .mensaje {
-     position: absolute;
-     top: 85%;
-     left: 50%;
-
-
-     width: 700px;
-     max-width: 100%;
-
-     transform: translate(-50%, -50%);
-     text-align: center;
-     z-index: 1;
-
-   }
-
-   @media(min-width: 992px) {
-     .mensaje {
-       left: 35%;
-     }
-   }
-
-   @media(min-width: 1200px) {
-     .mensaje {
-       left: 30%;
-     }
-   }
-
-   @media(min-width: 1400px) {
-     .mensaje {
-       left: 25%;
-     }
-   }
-
-   @media(min-width: 1800px) {
-     .mensaje {
-       left: 20%;
-     }
-   }
-
-   .mensaje__titulo {
-     padding: 3.5rem 4rem !important;
-     color: white;
-     border-radius: 0.5rem;
-     display: flex;
-     text-shadow: 0.5px 4px 10px #353535;
-     line-height: 45px;
-     border: 3px solid #ffb606;
-     background: rgba(0, 0, 0, .5);
-     /* margin-top: 100.078px; */
-     font-weight: 700;
-     margin-bottom: 40px;
-     font-size: 2.2rem;
    }
 
    /* FIN Posicionamiento del mensaje en las imagenes de carrusel */

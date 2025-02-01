@@ -4,31 +4,37 @@
   <div class="seccion-iconos row justify-content-between">
 
     <div class="col-12 mb-4">
-      <h2 class="text-uppercase h2-web" style="margin-bottom: 0px;">De Interes Ciudadano</h2>
+      <h2 class="text-uppercase h2-web" style="margin-bottom: 0px;">Servicio al ciudadano</h2>
       <P class="circulos text-center">
-        <i class="far fa-circle circulos__icons"></i>
-        <i class="far fa-circle circulos__icons"></i>
-        <i class="far fa-circle circulos__icons"></i>
+        <i class="fa fa-circle-o circulos__icons"></i>
+        <i class="fa fa-circle-o circulos__icons"></i>
+        <i class="fa fa-circle-o circulos__icons"></i>
       </P>
     </div>
 
+
     <!-- Gaceta Municipal -->
-    <div class="col-12 col-md-4 iconos animated fadeInLeft" style="animation-delay: 0.3s; animation-duration: 1.3s;">
-      <p class="seccion-iconos__icon"><i class="bi bi-bank"></i></p>
+    <a target="_blank" class="col-12 col-md-4 iconos animated fadeInLeft"
+      style="animation-delay: 0.3s; animation-duration: 1.3s;"
+      href="https://cliza.gob.bo/web/normativas-tributarias.php">
+      <p class="seccion-iconos__icon"><i class="fa fa-institution"></i></p>
       <h3 class="iconos__titulo">Gaceta Municipal</h3>
-    </div>
+    </a>
 
-    <!-- Reclamos para alumbrado publico -->
-    <div class="col-12 col-md-4 iconos animated fadeInDown " style="animation-delay: 0.3s; animation-duration: 1.3s;">
-      <p class="seccion-iconos__icon"><i class="bi bi-sun"></i></p>
-      <h3 class="iconos__titulo">Reclamos alumbrado publico</h3>
-    </div>
+    <!-- Gestión Transparente -->
+    <a target="_blank" class="col-12 col-md-4 iconos animated fadeInLeft"
+      style="animation-delay: 0.3s; animation-duration: 1.3s;"
+      href="https://cliza.gob.bo/web/normativas-tributarias.php">
+      <p class="seccion-iconos__icon"><i class="fa fa-file-text"></i></p>
+      <h3 class="iconos__titulo">Gestión Transparente</h3>
+    </a>
 
-    <!-- Seguimiento a tramites -->
-    <div class="col-12 col-md-4 iconos  animated fadeInRight" style="animation-delay: 0.3s; animation-duration: 1.3s;">
-      <p class="seccion-iconos__icon"><i class="bi bi-signpost-split"></i></p>
-      <h3 class="iconos__titulo">Seguimiento a tramites</h3>
-    </div>
+    <!-- Servicio al ciudadano -->
+    <a href="{{item.url_documento}}" target="_blank" *ngFor="let item of this.listCiudadano"
+      class="col-12 col-md-4 iconos animated fadeInLeft" style="animation-delay: 0.3s; animation-duration: 1.3s;">
+      <p class="seccion-iconos__icon"><i class="{{item.imagen}}"></i></p>
+      <h3 class="iconos__titulo">{{item.descripcion}}</h3>
+    </a>
 
   </div>
 

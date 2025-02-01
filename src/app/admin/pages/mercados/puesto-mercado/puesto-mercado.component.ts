@@ -94,6 +94,8 @@ export class PuestoMercadoComponent implements OnInit, OnDestroy {
 
             const details = JSON.parse(JSON.stringify(resp));
 
+            // console.log(details);
+
             callback({
               recordsTotal: details.recordsTotal,
               recordsFiltered: details.recordsFiltered,
@@ -111,7 +113,7 @@ export class PuestoMercadoComponent implements OnInit, OnDestroy {
       columns: [
         { data: null }, // Este será el índice de la fila
         { data: 'nro_puesto' },
-        // { data: 'titular_id' },
+        { data: 'sector.sector' }, // Para ingresar a subregistros
         {
           data: null,
           render(data, type, row, meta) {

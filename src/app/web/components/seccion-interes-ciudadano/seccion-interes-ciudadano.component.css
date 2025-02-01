@@ -8,6 +8,7 @@
   font-size: 5rem;
   text-align: center;
   color: var(--secundario);
+  font-weight: lighter;
 }
 
 .iconos {

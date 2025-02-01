@@ -1,11 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark fondo animated fadeIn fast fixed-top2 " id="menuMain">
+<nav class="navbar navbar-expand-lg navbar-dark fondo animated fadeIn fast" id="menuMain">
 
-  <div class="container logo-menu" id="" style="max-width: 1600px;">
+  <div class="container logo-menu" id="" style="max-width: 1800px !important">
 
     <a class="navbar-brand " href="#">
       <img class="img-fluid logoTecSur" src="./../../../../assets/img/logoclizasun-5.png"
         alt="Gobierno Autónomo Municipal de Cliza">
     </a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -16,22 +17,35 @@
 
         <!-- Inicio -->
         <li class="nav-item active" routerLinkActive="active">
-          <a class="nav-link inicio text-uppercase">Inicio<span class="sr-only">(current)</span></a>
+          <a class="nav-link acerca text-uppercase">Inicio<span class="sr-only">(current)</span></a>
         </li>
-
-        <!-- Nosotros -->
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link acerca text-uppercase">Nosotros</a>
-        </li>
-
-        <!-- Servicios -->
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link acerca text-uppercase">Servicios</a>
-        </li>
-
         <!-- Gobierno -->
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link acerca text-uppercase">Gobierno municipal</a>
+        </li>
+
+
+        <li class="nav-item dropdown--servicio" routerLinkActive="active" (mouseenter)="showMenuServicio = true"
+          (mouseleave)="showMenuServicio = false">
+          <a class="nav-link acerca text-uppercase">Servicio al ciudadano</a>
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu--servicio" [class.showServicio]="showMenuServicio">
+
+
+
+            <a *ngFor="let item of this.listCiudadano" target="_blank" class="dropdown-item acerca--ancor"
+              [href]="item.url_documento">
+              {{ item.descripcion }}
+            </a>
+
+          </div>
+        </li>
+
+
+        <!-- Gaceta municipal -->
+        <li class="nav-item" routerLinkActive="active">
+          <a href="https://cliza.gob.bo/web/normativas-tributarias.php" class="nav-link acerca text-uppercase">Gaceta
+            municipal</a>
         </li>
 
         <!-- Noticias -->
@@ -40,26 +54,31 @@
         </li>
 
         <!-- Turismo y cultura -->
-        <li class="nav-item" routerLinkActive="active">
+        <!-- <li class="nav-item" routerLinkActive="active">
           <a class="nav-link acerca text-uppercase">Turismo y cultura</a>
+        </li> -->
+
+        <!-- Gestión con transparencia -->
+        <li class="nav-item dropdown" routerLinkActive="active" (mouseenter)="showMenu = true"
+          (mouseleave)="showMenu = false">
+          <a class="nav-link acerca text-uppercase">Gestión Transparente</a>
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu" [class.show]="showMenu">
+            <a target="_blank" class="dropdown-item acerca--ancor" href="https://cliza.gob.bo/web/transparencia">
+              Transparencia
+            </a>
+            <a target="_blank" class="dropdown-item acerca--ancor" href="https://cliza.gob.bo/web/auditoria.php">
+              Auditoria Interna
+            </a>
+          </div>
         </li>
+
 
         <!-- Contacto -->
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link acerca text-uppercase">Contacto</a>
-        </li>
-
-        <!-- Más -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-            aria-expanded="false">MÁS</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Participación ciudadana</a>
-            <a class="dropdown-item" href="#">Seguridad y emergencia</a>
-            <a class="dropdown-item" href="#">Educación y salud</a>
-            <!-- <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a> -->
-          </div>
+        <li class="nav-item d-flex" routerLinkActive="active">
+          <a href="https://www.facebook.com/granerodeBolivia" target="_blank" class="nav-link acerca text-uppercase"><i
+              class="fa fa-facebook-square" style="font-size: 1.2rem;"></i></a>
+          <a class="nav-link acerca text-uppercase"><i class="fa fa-youtube-play" style="font-size: 1.2rem;"></i></a>
         </li>
 
 

@@ -1,8 +1,10 @@
 .footer-container {
   /* background-image: url('../../../../assets/img/bg-menu.png'); */
   /* z-index: 999; */
-  background: rgb(15, 167, 246);
-  background: linear-gradient(90deg, rgba(15, 167, 246, 1) 0%, rgba(9, 45, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  /* background: rgb(15, 167, 246); */
+  /* background: linear-gradient(90deg, rgba(15, 167, 246, 1) 0%, rgba(9, 45, 121, 1) 35%, rgba(0, 212, 255, 1) 100%); */
+  /* background: linear-gradient(90deg, rgba(15, 45, 121, 1) 0%, rgba(9, 167, 246, 1) 35%, rgba(0, 212, 255, 1) 100%); */
+  background-color: #0389e2;
 }
 
 .footer__row {
@@ -11,7 +13,7 @@
 
 
 .footer__logo {
-  max-width: 70%;
+  max-width: 100%;
 }
 
 @media (min-width: 576px) {
@@ -22,7 +24,7 @@
 
 @media (min-width: 768px) {
   .footer__logo {
-    max-width: 90%;
+    max-width: 60%;
   }
 }
 

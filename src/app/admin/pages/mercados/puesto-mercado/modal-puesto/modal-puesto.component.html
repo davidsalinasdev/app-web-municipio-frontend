@@ -15,22 +15,6 @@
 
                 <div class="modal-body modal-body--form row">
 
-                    <!-- Número de puesto -->
-                    <div class="col-12 col-lg-4 form-group">
-                        <label for="nro_puesto-puesto">N° Puesto<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control" id="nro_puesto-puesto"
-                            placeholder="Ingrese el N° de puesto" formControlName="nro_puesto" autocomplete="off">
-                        <!-- Validacion -->
-                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
-                        <div *ngIf="this.nroPuesto?.invalid && (this.nroPuesto?.dirty || this.nroPuesto?.touched)">
-                            <!-- Errores con expresiones regulares -->
-                            <div *ngIf="this.nroPuesto?.hasError('required')"
-                                class="animated fadeIn fast text-danger font-14" id="">
-                                Este campo es requerido.
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Sector -->
                     <div class="col-12 col-lg-4 form-group">
                         <label for="mercado-sector-select2">Sector<span class="text-danger">*</span></label>
@@ -64,6 +48,22 @@
                         </select>
                         <div *ngIf="titular?.invalid && (titular?.dirty || titular?.touched)">
                             <div *ngIf="titular?.hasError('required')" class="animated fadeIn fast text-danger font-14">
+                                Este campo es requerido.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Número de puesto -->
+                    <div class="col-12 col-lg-4 form-group">
+                        <label for="nro_puesto-puesto">N° Puesto<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control" id="nro_puesto-puesto"
+                            placeholder="Ingrese el N° de puesto" formControlName="nro_puesto" autocomplete="off">
+                        <!-- Validacion -->
+                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+                        <div *ngIf="this.nroPuesto?.invalid && (this.nroPuesto?.dirty || this.nroPuesto?.touched)">
+                            <!-- Errores con expresiones regulares -->
+                            <div *ngIf="this.nroPuesto?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14" id="">
                                 Este campo es requerido.
                             </div>
                         </div>
@@ -171,23 +171,6 @@
 
                 <div class="modal-body modal-body--form row">
 
-                    <!-- Número de puesto -->
-                    <div class="col-12 col-lg-4 form-group">
-                        <label for="nro_puestoUpdate-puesto">N° Puesto<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control" id="nro_puestoUpdate-puesto"
-                            placeholder="Ingrese el N° de puesto" formControlName="nro_puestoUpdate" autocomplete="off">
-                        <!-- Validacion -->
-                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
-                        <div
-                            *ngIf="this.nroPuestoUpdate?.invalid && (this.nroPuestoUpdate?.dirty || this.nroPuestoUpdate?.touched)">
-                            <!-- Errores con expresiones regulares -->
-                            <div *ngIf="this.nroPuestoUpdate?.hasError('required')"
-                                class="animated fadeIn fast text-danger font-14" id="">
-                                Este campo es requerido.
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Sector -->
                     <div class="col-12 col-lg-4 form-group">
                         <label for="mercado-sector-update-select2">Sector<span class="text-danger">*</span></label>
@@ -225,6 +208,23 @@
                             *ngIf="titularPuestoUpdate?.invalid && (titularPuestoUpdate?.dirty || titularPuestoUpdate?.touched)">
                             <div *ngIf="titularPuestoUpdate?.hasError('required')"
                                 class="animated fadeIn fast text-danger font-14">
+                                Este campo es requerido.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Número de puesto -->
+                    <div class="col-12 col-lg-4 form-group">
+                        <label for="nro_puestoUpdate-puesto">N° Puesto<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control" id="nro_puestoUpdate-puesto"
+                            placeholder="Ingrese el N° de puesto" formControlName="nro_puestoUpdate" autocomplete="off">
+                        <!-- Validacion -->
+                        <!-- Preguntamos si es invalido y si esta sucio o a sido tocado -->
+                        <div
+                            *ngIf="this.nroPuestoUpdate?.invalid && (this.nroPuestoUpdate?.dirty || this.nroPuestoUpdate?.touched)">
+                            <!-- Errores con expresiones regulares -->
+                            <div *ngIf="this.nroPuestoUpdate?.hasError('required')"
+                                class="animated fadeIn fast text-danger font-14" id="">
                                 Este campo es requerido.
                             </div>
                         </div>

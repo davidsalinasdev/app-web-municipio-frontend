@@ -21,12 +21,19 @@ export class GenerarCobroComponent {
     toastr.options.positionClass = 'toast-top-right';
   }
 
+
+
   /**
   * generarCobro
   */
   public generarCobro() {
     this.isLoading = true; // Deshabilita el botón
-    this.generarCobroServices.storeCobro()
+
+    const data = {
+      fecha_actual: this.fechaActual
+    };
+
+    this.generarCobroServices.storeCobro(data)
       .subscribe((resp: any) => {
 
         if (resp.status === 'success') {
